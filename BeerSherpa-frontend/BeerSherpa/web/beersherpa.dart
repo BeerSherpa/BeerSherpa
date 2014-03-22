@@ -20,7 +20,7 @@ void main()
 	checkLogin();
 	
 	//DEBUG
-	SearchBeer("Sierra Nevada");
+	Search("founders imperial red");
 	//ENDDEBUG
 }
 

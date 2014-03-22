@@ -3,12 +3,11 @@ body {
   padding-bottom: 100px;
 }
 
-.scroll-results{
-  max-height: 250px;
+#scroll-results{
+  max-height: 300px;
   overflow: scroll;
 }
 
 #tiny-navbar-pic {
 	margin-top: -10px;
 }
-
