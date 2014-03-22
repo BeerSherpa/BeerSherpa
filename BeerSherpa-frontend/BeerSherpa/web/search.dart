@@ -5,6 +5,9 @@ int MAX_RESULTS = 40; //Limit search to x results (note: we only consider beers 
 void initSearch(){
   //Init listener for advice button
   querySelector("#advice-button-submit")..onClick.listen((MouseEvent e) => advice());
+  //Same for tasts textfield
+  querySelector("#tastes-button-submit")..onClick.listen((MouseEvent e) => tastes());
+      
 }
 
 void Search(String query){
@@ -154,9 +157,14 @@ void selectedResult(Map singleResult){
   
 }
 
-void advice(){
+void advice(){ //cant implement keyboard listener until we figure out how to triggle a data-toggle for the modal
+    querySelector("#scroll-results").children.clear();
+    SearchBeer((querySelector("#advice-input-beer") as InputElement).value);
+}
+
+void tastes(){
   querySelector("#scroll-results").children.clear();
-  SearchBeer((querySelector("#advice-input-beer") as InputElement).value);
+  Search((querySelector("#tastes-input-beer") as InputElement).value);
 }
 
 
