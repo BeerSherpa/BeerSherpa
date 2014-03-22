@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beer Sherpa</title>
+
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+  <div id="navbar-container" class="container"><!-- Start Main Navbar Container -->
+    <div id="login-nav">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sherpa-nav"><!-- responsive button for small screens only -->
+            <span class="sr-only">Toggle navigation</span>
+            <p>Login</p>
+          </button>
+          <a class="navbar-brand" href="#"><img src="./img/tiny.png" id="tiny-navbar-pic"/> Beer Sherpa</a>
+        </div><!--/ header -->
+        <div class="collapse navbar-collapse" id="sherpa-nav">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input id="navbar-input-username" type="text" class="form-control" placeholder="Username">
+              <input id="navbar-input-password" type="password" class="form-control" placeholder="Password">
+            </div>
+            <button id="navbar-button-login" type="submit" class="btn btn-default">Login</button>
+          </form>
+        </div><!--/ collapse nav -->
+      </nav>
+    </div><!--/ login-nav -->
+
+    <div id="normal-nav">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sherpa-nav">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="./img/tiny.png" id="tiny-navbar-pic"/> Beer Sherpa</a>
+        </div><!--/ header -->
+        <div class="collapse navbar-collapse" id="sherpa-nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li id="li-advice" class="active"><a href="#">Advice</a></li>
+            <li id="li-tastes" ><a href="#">Tastes</a></li>
+            <li id="li-profile" ><a href="#">Profile</a></li>
+            <li id="li-logout" ><a href="#">Log Out</a></li>
+          </ul>
+        </div><!--/ collapse nav -->
+      </nav>
+    </div><!--/ normal-nav -->
+  </div><!--/ Main Navbar Container -->
+
+
+
+  <!-- *** BREAK BETWEEN NAV AND CONTENT *** -->
+
+
+
+  <div id="content-container" class="container"><!-- Start Main Container for All Pages -->
+
+
+
+
+    <div id="landing-page"><!-- landing page (1) -->
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-sm-4">
+            <p><img src="./img/logo.png" class="img-responsive img-rounded"/></p>
+          </div>
+          <div class="col-sm-8">
+              <h1>Meet the Sherpa!</h1>
+              <p class="lead">He will be your personal guide through the world of craft beer.</p>
+              <p class="text-justify">The Sherpa doesn't offer suggestions but, rather, guides you before you purchase a beer. The Sherpa will first learn your personal taste-profile based on beers you rate with a simple thumbs-up or thumbs-down. Then, when you are at the bar or bottle-shop, you can ask the Sherpa if you'd enjoy a beer before you make the purchase.</p>
+              <p class="text-justify">Sign up below and never buy a bad beer again!</p>
+          </div><!--/ col-md-8 -->
+        </div><!--/ row -->
+      </div><!--/ jumbotron-->
+
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-md-8">
+             <h1>Signing Up is Easy</h1>
+             <p class="text-muted">Simply provide an email address and create a password.</p>
+          </div>
+          <div class="col-md-4">
+             <form role="form">
+                <div class="form-group">
+                  <label for="email-input">Email address</label>
+                  <input id="signup-input-email" type="email" class="form-control" id="email-input" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="password-input">Password</label>
+                  <input id="signup-input-password" type="password" class="form-control" id="password-input" placeholder="Create Password">
+                </div>
+                <br />
+                <button id="signup-button-submit" type="submit" class="btn btn-lg btn-primary btn-block">Create an Account</button>
+              </form>
+          </div>
+        </div><!--/ row -->
+      </div><!--/ jumbotron -->
+    </div><!--/ landing page (1) -->
+
+    <div id="advice-page"><!-- advice page (2) -->
+      <div id="top-jumbotron" class="jumbotron">
+        <h1>Need Advice?</h1>
+        <p class="lead">Let the Sherpa guide your decision before you buy a beer:</p>
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="input-group input-group-lg">
+              <input id="advice-input-beer" type="text" class="form-control" placeholder="Enter a beer">
+              <span class="input-group-btn">
+                <button id="advice-button-submit" class="btn btn-primary" type="button">Get Advice</button>
+              </span>
+            </div><!--/ input-group -->
+          </div><!--/ col-lg-6 -->
+        </div><!--/ row -->
+      </div><!--/ jumbotron-->
+
+      <br />
+
+      <div id="beer-info-jumbotron" class="jumbotron">
+        <h1><small>Beer Information Card</small></h1>
+      </div><!--/ beer-info-jumbotron -->
+
+      <br />
+
+      <div id="results-jumbotron" class="jumbotron">
+
+        <h1><small>You'll</small> Love <small>this beer!</small></h1>
+        <p class="text-muted">the Sherpa is 87% sure</p>
+
+        <div class="row">
+          <h2>Here's why:</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favorite Brewery!</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favorite Style!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <h4>Hops</h4>
+            <p class="text-muted">68% flavor-match</p>
+            <p class="text-justify">Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4>Malts &amp; Fermentables</h4>
+            <p class="text-muted">27% flavor-match</p>
+            <p class="text-justify">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+          </div>
+
+          <div class="col-md-4">
+            <h4>Yeast</h4>
+            <p class="text-muted">89% flavor-match</p>
+            <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+              <h4>IBU</h4>
+              <p class="text-muted">83% flavor-match</p>
+              <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            </div>
+            <div class="col-md-6">
+              <h4>ABV</h4>
+              <p class="text-muted">12% flavor-match</p>
+              <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            </div>
+        </div>
+      </div> <!--/ results-jumbotron-->
+    </div><!--/ advice page (2) -->
+
+
+
+
+    <div id="tastes-page"><!-- tastes page (3) -->
+      <div id="top-jumbotron" class="jumbotron">
+        <h1>Add to your tastes</h1>
+        <p class="lead">Tell the Sherpa what you like:</p>
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="input-group input-group-lg">
+              <span class="input-group-btn">
+                <button id="tastes-button-submit" class="btn btn-success" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+              </span>
+              <input id="tastes-input-beer" type="text" class="form-control" placeholder="Enter a beer or brewery">
+            </div><!--/ input-group -->
+          </div><!--/ col-lg-12 -->
+        </div><!--/ row -->
+      </div><!--/ jumbotron-->
+
+      <br />
+
+      <div id="rate-jumbotron" class="jumbotron">
+        <h1>Do you like these beers?</h1>
+        <p class="text-muted">the Sherpa wants to know</p>
+        <div class="row">
+          <div class="col-xs-8">
+            <p><img id="rate-img" src="./label.png" class="img-responsive img-rounded"/></p>
+          </div>
+          <div class="col-xs-4">
+            <button id="rate-button-thumbs-up" class="btn btn-lg btn-block btn-success" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+            <br />
+            <button id="rate-button-thumbs-down" class="btn btn-lg btn-block btn-danger" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Ew</button>
+            <br />
+            <button id="rate-button-skip" class="btn btn-block btn-info" type="button"><span class="glyphicon glyphicon-step-forward"></span> Skip</button>
+          </div>
+        </div><!--/ row -->
+      </div> <!--/ rate-jumbotron-->
+
+    </div><!--/ tastes page (3) -->
+
+
+
+
+    <div id="profile-page"><!-- profile page (4) -->
+      
+
+      <div id="profile-wordcloud-jumbotron" class="jumbotron">
+        <h1>Personal Taste-Profile</h1>
+        <h1>TASTE CLOUD SCIENCE</h1>
+        <p class="text-muted">wow. look at this cool sciency thing</p>
+        
+        <div class="row">
+          
+          <!-- INPUT WORDCLOUD HERE -->
+
+        </div><!--/ row -->
+
+      </div><!--/ profile-wordcloud-jumbotron -->
+
+    </div><!--/ profile page (4) -->
+  </div><!--/ Main Container for All Pages -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+  </body>
+</html>

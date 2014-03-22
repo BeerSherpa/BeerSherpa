@@ -1,0 +1,13 @@
+body {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.scroll-beers{
+  max-height: 185px;
+  overflow: scroll;
+}
+
+#tiny{
+	margin-top: -10px;
+}
