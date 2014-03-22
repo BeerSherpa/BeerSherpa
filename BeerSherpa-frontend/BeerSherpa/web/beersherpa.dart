@@ -4,6 +4,7 @@ import 'dart:convert';
 
 part 'search.dart';
 part 'account.dart';
+part 'vector.dart';
 
 Map<String,Element> pageDivs = new Map();
 Storage localStorage = window.localStorage;
@@ -18,7 +19,7 @@ void main()
 	checkLogin();
 	
 	//DEBUG
-	Search();
+	SearchBeer("Sierra Nevada");
 	//ENDDEBUG
 }
 
