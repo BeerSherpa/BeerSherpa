@@ -144,6 +144,60 @@ void addResult(Map singleResult, UListElement ul, Map images){
   
 }
 
+/*
+ * Create the beer info jumbotron html
+ */
+void createBeerInfoCard(Map singleResult){
+    DivElement row = new DivElement()..className="row";
+    DivElement col4 = new DivElement()..className="col-sm-4";
+    DivElement col8 = new DivElement()..className="col-sm-8"..text="${singleResult["description"]}";
+    DivElement panel = new DivElement()..className="panel panel-info";
+    DivElement panelHeading = new DivElement()..className="panel-heading";
+    DivElement panelBody = new DivElement()..className="panel-body";
+    HeadingElement panelTitle = new HeadingElement.h3()..className="panel-title"..text="${singleResult["name"]}  ";
+    Map images = singleResult["labels"];
+    
+    //Get brewery name
+    List listd = singleResult["breweries"];
+    
+    if (listd != null){
+      Map brewery = listd[0];
+      SpanElement brewspan = new SpanElement()..className="text-muted"..text="  --  ${brewery["name"]}";
+      panelTitle.append(brewspan);
+    }
+    
+    panelBody.append(row);
+    row.append(col4);
+    row.append(col8);
+    
+    String iconURL;
+    if(images != null){
+      iconURL = images["medium"];
+    }
+    
+    //Create img and add it if needed
+    if(iconURL != null){
+      ImageElement icon = new ImageElement(src: iconURL);
+      icon.className="img-responsive img-rounded";
+      col4.append(icon);
+    } else {
+      col4.text = "[ no picture ]";
+    }
+    
+    if(col8.text == "null"){
+      panelBody.text = "[ no description ]";
+    }
+    
+
+    
+    panelHeading.append(panelTitle);
+    panel.append(panelHeading);
+    panel.append(panelBody);
+  
+    querySelector("#beer-info-card")..append(panel);
+
+}
+
 
 /*
  * 
@@ -152,14 +206,27 @@ void addResult(Map singleResult, UListElement ul, Map images){
  */
 void selectedResult(Map singleResult){
   
-  print(singleResult["id"]);
+  if(!querySelector("#advice-page").classes.contains("hidden")){ //if the advice page is not hidden, we will assume we are seeking advice
+    //get the beer jumbotron
+    querySelector("#beer-info-card").classes.remove("hidden");
+    querySelector("#results-jumbotron").classes.remove("hidden");
+    
+    createBeerInfoCard(singleResult);
+    
+    //format the styling
+    
+  } else { //the advice page is hidden, we will assume we are seeking likes
+    
+  }
   
   
 }
 
 void advice(){ //cant implement keyboard listener until we figure out how to triggle a data-toggle for the modal
-    querySelector("#scroll-results").children.clear();
-    SearchBeer((querySelector("#advice-input-beer") as InputElement).value);
+  querySelector("#scroll-results").children.clear();
+  querySelector("#beer-info-card").children.clear();
+  querySelector("#results-jumbotron").classes.add("hidden");
+  SearchBeer((querySelector("#advice-input-beer") as InputElement).value);
 }
 
 void tastes(){
