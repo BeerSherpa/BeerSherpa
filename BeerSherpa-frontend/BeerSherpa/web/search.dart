@@ -51,13 +51,13 @@ void showResults(String responseText) {
       if(singleResult["type"] == "beer"){
         addResult(singleResult);
         //set image of beer (labels{})
-        singleResult["labels"]["icon"];
+		singleResult["labels"];
         
         
       } else if (singleResult["type"] == "brewery"){
         addResult(singleResult);
         //set image of brewery (images{})
-        singleResult["images"]["icon"];
+		singleResult["images"];
         
       }
         

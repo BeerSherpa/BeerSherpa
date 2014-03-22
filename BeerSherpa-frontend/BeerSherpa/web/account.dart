@@ -12,7 +12,16 @@ class User
 	
 	User.fromMap(Map map)
 	{
-		print(map);
+		email = map["email"];
+		password = map["password"];
+		flavorProfile = new FlavorProfile();
+		flavorProfile.hops = map["hops"];
+		flavorProfile.malt = map["malt"];
+		flavorProfile.yeast = map["yeast"];
+		flavorProfile.ibu = map["abv"];
+		flavorProfile.abv = map["ibu"];
+		flavorProfile.style = map["style"];
+		flavorProfile.brewery = map["brewery"];
 	}
 }
 
@@ -47,9 +56,17 @@ void checkLogin()
 
 void loginUser(String email, String password)
 {
+	Element loginButton = querySelector("#navbar-button-login")
+		..text = "Logging In..."
+		..classes.add("disabled");
+	
 	String url = "http://beersherpaapp.appspot.com/login?email=$email&password=$password";
 	HttpRequest.getString(url).then((response)
 	{
+		loginButton
+			..text = "Login"
+			..classes.remove("disabled");
+		
 		try
 		{
 			User user = new User.fromMap(JSON.decode(response));
@@ -58,9 +75,15 @@ void loginUser(String email, String password)
         	pageDivs["advice-page"].classes.remove("hidden");
         	querySelector("#normal-nav").classes.remove("hidden");
         	querySelector("#login-nav").classes.add("hidden");
+        	hideAllPages();
+        	pageDivs["advice-page"].classes.remove("hidden");
 		}
 		catch(error) //couldn't login with given credentials
 		{
+			InputElement loginEmail = querySelector("#navbar-input-email");
+			InputElement loginPassword = querySelector("#navbar-input-password");
+			addWarning(loginEmail,"remove","has-error");
+			addWarning(loginPassword,"remove","has-error");
 			return;
 		}
 	});
@@ -87,55 +110,50 @@ void attachListeners()
     
     querySelector("#signup-button-submit").onClick.listen((MouseEvent event)
 	{
-    	if(!validateInput(emailInput,passwordInput))
-			return;
-		else
-			newUser(emailInput.value,passwordInput.value);
+    	checkKey(newUser,false,null,emailInput,passwordInput);
 	});
     
     querySelector("#navbar-button-login").onClick.listen((MouseEvent event)
 	{
-    	if(!validateInput(loginEmail,loginPassword))
-			return;
-		else
-			loginUser(loginEmail.value,loginPassword.value);
+    	checkKey(loginUser,false,null,loginEmail,loginPassword);
 	});
 	
 	emailInput.onKeyPress.listen((KeyboardEvent key)
 	{
-		if(key.keyCode != 13) //listen for enter key
-		{
-			removeError(emailInput);
-			return;
-		}
-		
-		if(!validateInput(emailInput,passwordInput))
-			return;
-		else
-			newUser(emailInput.value,passwordInput.value);
+		checkKey(newUser,true,key,emailInput,passwordInput);
 	});
 	passwordInput.onKeyPress.listen((KeyboardEvent key)
 	{
-		if(key.keyCode != 13) //listen for enter key
-		{
-			removeError(passwordInput);
-			return;
-		}
-		
-		if(!validateInput(passwordInput,passwordInput))
-			return;
-		else
-        	newUser(emailInput.value,passwordInput.value);
+		checkKey(newUser,true,key,emailInput,passwordInput);
 	});
 	
 	loginEmail.onKeyPress.listen((KeyboardEvent key)
 	{
-		if(key.keyCode != 13) //listen for enter key
-		{
-			removeError(passwordInput);
-			return;
-		}
+		checkKey(loginUser,true,key,loginEmail,loginPassword);
 	});
+	
+	loginPassword.onKeyPress.listen((KeyboardEvent key)
+	{
+		checkKey(loginUser,true,key,loginEmail,loginPassword);
+	});
+}
+
+void checkKey(Function successFunction, bool checkKeyCode, KeyboardEvent key, InputElement emailInput, InputElement passwordInput)
+{
+	if(checkKeyCode && key.keyCode != 13) //listen for enter key
+	{
+		removeError(passwordInput);
+		return;
+	}
+	
+	if(!validateInput(emailInput,passwordInput))
+		return;
+	else
+	{
+		successFunction(emailInput.value,passwordInput.value);
+		emailInput.value = "";
+		passwordInput.value = "";
+	}
 }
 
 void newUser(String email, String password)
@@ -159,6 +177,7 @@ void newUser(String email, String password)
 			localStorage["loggedIn"] = email;
 			hideAllPages();
 			querySelector("#normal-nav").classes.remove("hidden");
+			pageDivs["advice-page"].classes.remove("hidden");
 		}
 		catch(error)
 		{
@@ -171,15 +190,13 @@ bool validateInput(InputElement emailInput, InputElement passwordInput)
 {
 	if(emailInput.value.trim() == "")
 	{
-		print("email blank");
-		addError(emailInput);
+		addWarning(emailInput,"warning-sign","has-warning");
 		
 		return false;
 	}
 	if(passwordInput.value.trim() == "")
 	{
-		print("password blank");
-		addError(passwordInput);
+		addWarning(passwordInput,"warning-sign","has-warning");
 		
 		return false;
 	}
@@ -187,12 +204,12 @@ bool validateInput(InputElement emailInput, InputElement passwordInput)
 	return true;
 }
 
-void addError(InputElement element)
+void addWarning(InputElement element, String icon, String className)
 {
 	SpanElement glyphicon = new SpanElement()
-		..className = "glyphicon glyphicon-remove form-control-feedback";
+		..className = "glyphicon glyphicon-$icon form-control-feedback";
 	element.parent.classes
-		..add("has-error")
+		..add(className)
 		..add("has-feedback");
 	element.parent.append(glyphicon);
 }
@@ -201,10 +218,10 @@ void removeError(InputElement element)
 {
 	SpanElement span = element.parent.querySelector(".form-control-feedback");
 	if(span != null)
-	{
 		span.remove();
-		element.parent.classes
-			..remove("has-error")
-			..remove("has-feedback");
-	}
+	
+	element.parent.classes
+		..remove("has-error")
+		..remove("has-warning")
+		..remove("has-feedback");
 }
