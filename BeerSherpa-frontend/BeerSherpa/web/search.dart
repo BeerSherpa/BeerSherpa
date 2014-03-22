@@ -97,7 +97,7 @@ void addResult(Map singleResult, UListElement ul, Map images){
   DivElement panelHeading = new DivElement()..className="panel-heading";
   DivElement panelBody = new DivElement()..className="panel-body";
   HeadingElement panelTitle = new HeadingElement.h3()..className="panel-title"..text="${singleResult["name"]}  ";
-  
+
   //Get brewery name
   List listd = singleResult["breweries"];
   

@@ -3,12 +3,45 @@ body {
   padding-bottom: 100px;
 }
 
-.scroll-results{
-  max-height: 250px;
+#scroll-results{
+  max-height: 300px;
   overflow: scroll;
 }
 
 #tiny-navbar-pic {
-	margin-top: -10px;
+	padding: 5px;
+	padding-right:0px;
+
 }
 
+#tiny-navbar-pic:hover{
+	cursor: pointer;
+}
+
+.brand {
+	color: #777;
+	font-size: 1em;
+}
+
+.brand:hover{
+	cursor: pointer;
+	color: #555;
+}
+
+ul.nav li{
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	color: #777;
+}
+
+ul.nav li:hover{
+	cursor: pointer;
+	color: #555;
+}
+
+ul.nav li.active{
+	background-color: #eee;
+	color: #555;
+}
