@@ -21,9 +21,8 @@ void main()
 	checkLogin();
 	initListeners();
 	
-	//DEBUG
-	SearchBeer("Sierra Nevada");
-	//ENDDEBUG
+	initSearch();
+	
 }
 
 void initListeners()
