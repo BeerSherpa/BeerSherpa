@@ -1,7 +1,7 @@
 part of BeerSherpa;
 
 void Search(){
-  var url = "http://api.brewerydb.com/v2/?key=$APIKEY";  
+  var url = "http://beersherpaapp.appspot.com/api?endpoint=beers";  
   var request = HttpRequest.getString(url).then(onDataLoaded);
 }
 
