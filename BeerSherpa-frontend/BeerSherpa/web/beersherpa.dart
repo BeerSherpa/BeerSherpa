@@ -19,9 +19,8 @@ void main()
 		
 	checkLogin();
 	
-	//DEBUG
-	Search("founders imperial red");
-	//ENDDEBUG
+	initSearch();
+	
 }
 
 void hideAllPages()

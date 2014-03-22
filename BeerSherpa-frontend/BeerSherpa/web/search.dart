@@ -2,6 +2,11 @@ part of BeerSherpa;
 
 int MAX_RESULTS = 40; //Limit search to x results (note: we only consider beers and breweries from the first x results -- therefore this number does not guarentee x hits)
 
+void initSearch(){
+  //Init listener for advice button
+  querySelector("#advice-button-submit")..onClick.listen((MouseEvent e) => advice());
+}
+
 void Search(String query){
   //Create url 
   String url = "http://beersherpaapp.appspot.com/api?endpoint=search&q=$query&withBreweries=Y";
@@ -31,7 +36,14 @@ void showResults(String responseText) {
 
   //If no results, display the label and thats it
   if(totalResults == null){
-    querySelector("#searchResults").querySelector("#modal-no-results").classes.remove("hidden");
+  
+    HeadingElement h1 = new HeadingElement.h1();
+    SpanElement noresultsfound = new SpanElement()..className="label label-warning"..text="No results found.";
+    
+    h1.append(noresultsfound);
+    
+    querySelector("#scroll-results").append(h1);
+
   } else { //We have results, so do things with them
     
     //Limit to MAX_RESULTS results
@@ -130,6 +142,12 @@ void addResult(Map singleResult, UListElement ul, Map images){
   
 }
 
+
+/*
+ * 
+ * LISTENER CALLBACKS:
+ * 
+ */
 void selectedResult(Map singleResult){
   
   print(singleResult["id"]);
@@ -137,6 +155,10 @@ void selectedResult(Map singleResult){
   
 }
 
+void advice(){
+  querySelector("#scroll-results").children.clear();
+  SearchBeer((querySelector("#advice-input-beer") as InputElement).value);
+}
 
 
 

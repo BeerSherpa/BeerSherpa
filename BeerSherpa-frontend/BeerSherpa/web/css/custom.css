@@ -11,3 +11,23 @@ body {
 #tiny-navbar-pic {
 	margin-top: -10px;
 }
+
+ul.nav li{
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+
+	color: #aaa;
+	font-weight: bold;
+}
+
+ul.nav li:hover{
+	cursor: pointer;
+	color: #333;
+}
+
+ul.nav li.active{
+	background-color: #eee;
+	color: #555;
+}
