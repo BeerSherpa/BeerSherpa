@@ -2,7 +2,6 @@ library BeerSherpa;
 import 'dart:html';
 
 part 'search.dart';
-part 'brewerydb.dart';
 
 Map<String,Element> pageDivs = new Map();
 
@@ -17,4 +16,8 @@ void main()
 	{
 		value.style.display = "none";
 	});
+	
+	//DEBUG
+	Search();
+	//ENDDEBUG
 }
