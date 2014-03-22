@@ -1,19 +1,17 @@
+library BeerSherpa;
 import 'dart:html';
+
+Map<String,Element> pageDivs = new Map();
 
 void main() 
 {
-	querySelector("#sample_text_id")
-		..text = "Click me!"
-		..onClick.listen(reverseText);
-}
-
-void reverseText(MouseEvent event) 
-{
-	var text = querySelector("#sample_text_id").text;
-	var buffer = new StringBuffer();
-	for (int i = text.length - 1; i >= 0; i--) 
+	pageDivs["landing-page"] = querySelector("#landing-page");
+	pageDivs["advice-page"] = querySelector("#advice-page");
+	pageDivs["tastes-page"] = querySelector("#tastes-page");
+	pageDivs["profile-page"] = querySelector("#profile-page");
+	
+	pageDivs.forEach((String key, Element value)
 	{
-		buffer.write(text[i]);
-	}
-	querySelector("#sample_text_id").text = buffer.toString();
+		value.style.display = "none";
+	});
 }
