@@ -1,39 +1,6 @@
 part of BeerSherpa;
 
-class User
-{
-	String email, password;
-	FlavorProfile flavorProfile;
-	
-	User(this.email,this.password)
-	{
-		flavorProfile = new FlavorProfile();
-	}
-	
-	User.fromMap(Map map)
-	{
-		email = map["email"];
-		password = map["password"];
-		flavorProfile = new FlavorProfile();
-		flavorProfile.hops = map["hops"];
-		flavorProfile.malt = map["malt"];
-		flavorProfile.yeast = map["yeast"];
-		flavorProfile.ibu = map["abv"];
-		flavorProfile.abv = map["ibu"];
-		flavorProfile.style = map["style"];
-		flavorProfile.brewery = map["brewery"];
-	}
-}
-
-class FlavorProfile
-{
-	Map<String,Liked> hops, malt, yeast, abv, ibu, style, brewery;
-}
-
-class Liked
-{
-	int total, liked;
-}
+User currentUser = null;
 
 void checkLogin()
 {
@@ -44,6 +11,7 @@ void checkLogin()
 		pageDivs["landing-page"].classes.remove("hidden");
 	else if(loggedIn != "none") //someone has logged in
 	{
+		currentUser = new User.fromMap(JSON.decode(loggedIn));
 		pageDivs["advice-page"].classes.remove("hidden");
 		querySelector("#normal-nav").classes.remove("hidden");
 		querySelector("#login-nav").classes.add("hidden");
@@ -69,9 +37,9 @@ void loginUser(String email, String password)
 		
 		try
 		{
-			User user = new User.fromMap(JSON.decode(response));
+			currentUser = new User.fromMap(JSON.decode(response));
 					
-			localStorage["loggedIn"] = email;
+			localStorage["loggedIn"] = response;
         	pageDivs["advice-page"].classes.remove("hidden");
         	querySelector("#normal-nav").classes.remove("hidden");
         	querySelector("#login-nav").classes.add("hidden");
@@ -174,7 +142,7 @@ void newUser(String email, String password)
 			Map map = JSON.decode(response);
 			User user = new User(email,password);
 			
-			localStorage["loggedIn"] = email;
+			localStorage["loggedIn"] = response;
 			hideAllPages();
 			querySelector("#normal-nav").classes.remove("hidden");
 			pageDivs["advice-page"].classes.remove("hidden");

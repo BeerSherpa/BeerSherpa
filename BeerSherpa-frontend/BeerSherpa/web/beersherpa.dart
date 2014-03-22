@@ -7,6 +7,7 @@ part 'search.dart';
 part 'account.dart';
 part 'vector.dart';
 part 'profile.dart';
+part 'user.dart';
 
 Map<String,Element> pageDivs = new Map();
 Storage localStorage = window.localStorage;
@@ -29,27 +30,44 @@ void initListeners()
 {
 	querySelector("#li-advice").onClick.listen((MouseEvent event)
 	{
-		print("here");
-		print("id"+(event.target as Element).id);
 		hideAllPages();
-		pageDivs["advice-page"].classes
-			..remove("hidden")
-			..add("active");
+		pageDivs["advice-page"].classes.remove("hidden");
+        (event.target as LIElement).classes.add("active");
+        
+        //hide jumbotrons
+        querySelector("#beer-info-jumbotron").classes.add("hidden");
+        querySelector("#results-jumbotron").classes.add("hidden");
+                
+        //clear search box
+        (querySelector("#advice-input-beer") as InputElement).value = "";
 	});
 	querySelector("#li-tastes").onClick.listen((MouseEvent event)
 	{
-		print((event.target as Element).id);
 		hideAllPages();
-		pageDivs["tastes-page"].classes
-	        ..remove("hidden")
-            ..add("active");
+		pageDivs["tastes-page"].classes.remove("hidden");
+        (event.target as LIElement).classes.add("active");
+        
+        //clear search box
+        (querySelector("#tastes-input-beer") as InputElement).value = "";
 	});
 	querySelector("#li-profile").onClick.listen((MouseEvent event)
-	{print((event.target as Element).id);
+	{
 		hideAllPages();
-		pageDivs["profile-page"].classes
-			..remove("hidden")
-			..add("active");
+		pageDivs["profile-page"].classes.remove("hidden");
+        (event.target as LIElement).classes.add("active");
+        
+        //refresh the word cloud
+        getWordCloudUrl().then((String url)
+		{
+        	ImageElement img = new ImageElement()
+        		..src = url
+        		..className = "img-responsive img-rounded center-block";
+        	img.onLoad.listen((_)
+    		{
+        		querySelector("#wordcloud-row").children.clear();
+        		querySelector("#wordcloud-row").append(img);
+    		});
+		});
 	});
 }
 
@@ -57,8 +75,11 @@ void hideAllPages()
 {
 	pageDivs.forEach((String name, Element element)
 	{
-		pageDivs[name].classes
-			..add("hidden")
-			..remove("active");
+		pageDivs[name].classes.add("hidden");
+		String subName = name.substring(0,name.indexOf("-"));
+		Element listElement = querySelector("#li-$subName");
+		if(listElement != null)
+			listElement.classes.remove("active");
 	});
+	
 }
