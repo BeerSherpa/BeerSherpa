@@ -16,6 +16,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.beersherpa.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>APIRequestServlet</servlet-name>
+    <servlet-class>com.beersherpa.APIRequestServlet</servlet-class>
+  </servlet>
 	<servlet-mapping>
 		<servlet-name>CreateUser</servlet-name>
 		<url-pattern>/createUser</url-pattern>
@@ -27,6 +31,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>APIRequestServlet</servlet-name>
+    <url-pattern>/api</url-pattern>
   </servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
