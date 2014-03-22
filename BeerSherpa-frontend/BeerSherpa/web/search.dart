@@ -68,8 +68,7 @@ void showResults(String responseText) {
         addResult(singleResult, newul, images);   
       } else if (singleResult["type"] == "brewery"){
         //set image of brewery (images{})
-        Map images = singleResult["images"]; 
-        
+        Map images = singleResult["images"];        
         addResult(singleResult, newul, images); //catch body to add img to         
       }
         

@@ -32,6 +32,8 @@ public class APIRequestServlet extends HttpServlet
 				urlString += "&"+ param.getKey() + "=" + param.getValue()[0].replace(" ", "+");
 			}
 		}
+		
+		System.out.println(urlString);
 				
 		try
 		{
