@@ -121,7 +121,7 @@
       </div><!--/ jumbotron -->
     </div><!--/ landing page (1) -->
 
-    <div id="advice-page" class="hidden"><!-- advice page (2) -->
+    <div id="advice-page" class="k"><!-- advice page (2) -->
       <div id="top-jumbotron" class="jumbotron">
         <h1>Need Advice?</h1>
         <p class="lead">Let the Sherpa guide your decision before you buy a beer:</p>
@@ -131,7 +131,7 @@
             <div class="input-group input-group-lg">
               <input id="advice-input-beer" type="text" class="form-control" placeholder="Enter a beer">
               <span class="input-group-btn">
-                <button id="advice-button-submit" class="btn btn-primary" type="button">Get Advice</button>
+                <button id="advice-button-submit" class="btn btn-primary" data-toggle="modal" data-target="#searchResults">Get Advice</button>
               </span>
             </div><!--/ input-group -->
           </div><!--/ col-lg-6 -->
@@ -265,6 +265,33 @@
 
     </div><!--/ profile page (4) -->
   </div><!--/ Main Container for All Pages -->
+
+
+
+  <!-- MODAL, SEARCH RESULTS -->
+  <div class="modal fade" id="searchResults" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h1 class="modal-title" id="myModalLabel">Which beer or brewery?</h1>
+          <p class="text-muted">The Sherpa needs to know.</p>
+
+        </div>
+        <div class="modal-body">
+          <div class="scroll-results">
+            <ul id="actual-results" class="list-unstyled">     
+            </ul>
+            <h1 id="modal-no-results" class="hidden"><span class="label label-warning">No results found.</span></h1>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <p class="text-muted">Can't find what you are looking for? <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">Search Again</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END MODAL -->
 
 
 

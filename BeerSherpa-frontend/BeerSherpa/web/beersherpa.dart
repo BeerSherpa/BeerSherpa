@@ -1,7 +1,9 @@
 library BeerSherpa;
 import 'dart:html';
+import 'dart:convert';
 
 part 'search.dart';
+part 'vector.dart';
 
 Map<String,Element> pageDivs = new Map();
 
@@ -13,6 +15,6 @@ void main()
 	pageDivs["profile-page"] = querySelector("#profile-page");
 	
 	//DEBUG
-	Search();
+	SearchBeer("Sierra Nevada");
 	//ENDDEBUG
 }
