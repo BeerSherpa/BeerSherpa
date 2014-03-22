@@ -15,7 +15,7 @@ body {
 }
 
 #tiny-navbar-pic:hover{
-	cursor: pointer;
+	cursor: default;
 }
 
 .brand {
@@ -24,8 +24,7 @@ body {
 }
 
 .brand:hover{
-	cursor: pointer;
-	color: #555;
+	cursor: default;
 }
 
 ul.nav li{
