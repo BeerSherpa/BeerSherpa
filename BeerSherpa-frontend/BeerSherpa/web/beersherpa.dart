@@ -4,8 +4,11 @@ import 'dart:convert';
 
 part 'search.dart';
 part 'vector.dart';
+part 'account.dart';
+
 
 Map<String,Element> pageDivs = new Map();
+Storage localStorage = window.localStorage;
 
 void main() 
 {
@@ -13,8 +16,18 @@ void main()
 	pageDivs["advice-page"] = querySelector("#advice-page");
 	pageDivs["tastes-page"] = querySelector("#tastes-page");
 	pageDivs["profile-page"] = querySelector("#profile-page");
+		
+	checkLogin();
 	
 	//DEBUG
 	SearchBeer("Sierra Nevada");
 	//ENDDEBUG
+}
+
+void hideAllPages()
+{
+	pageDivs.forEach((String name, Element element)
+	{
+		pageDivs[name].classes.add("hidden");
+	});
 }

@@ -1,11 +1,16 @@
 package com.beersherpa;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -13,6 +18,7 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 public class CreateUserServlet extends HttpServlet
@@ -22,6 +28,8 @@ public class CreateUserServlet extends HttpServlet
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");
 		
@@ -31,13 +39,24 @@ public class CreateUserServlet extends HttpServlet
 			user = new Entity("User",email);
 			user.setProperty("email", email);
 			user.setProperty("password", password);
-			user.setProperty("flavorProfile", new FlavorProfile());
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			ObjectOutputStream os = new ObjectOutputStream(stream);
+			os.writeObject(new FlavorProfile());
+			Blob profile = new Blob(stream.toByteArray());
+			user.setProperty("flavorProfile", profile);
 			
 			memcache.put(user, "user_"+email);
 			datastore.put(user);
 			
-			resp.setContentType("text/plain");
-			resp.getWriter().println("success");
+			User u = new User();
+			u.email = email;
+			u.password = password;
+			u.flavorProfile = new FlavorProfile();
+			
+			resp.setContentType("application/json");
+			Gson gson = new Gson();
+			String json = gson.toJson(u);
+			resp.getWriter().print(json);
 		}
 		else
 		{

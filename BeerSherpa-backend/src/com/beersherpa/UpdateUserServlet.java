@@ -26,6 +26,8 @@ public class UpdateUserServlet extends HttpServlet
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException
 	{
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");
 		
