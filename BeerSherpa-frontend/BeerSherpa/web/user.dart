@@ -378,8 +378,8 @@ class User
 		String url = "http://beersherpaapp.appspot.com/updateUser?email=$email&password=$password&user=$json";
 		HttpRequest.request(url, method: "GET").then((HttpRequest request)
 		{
-			//print(request.responseText);
-		});
+			print("updated user: " + request.responseText);
+		}).catchError((error) => print("error: " + error));
 	}
 	
 	String toJSON()

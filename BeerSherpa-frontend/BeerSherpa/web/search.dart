@@ -326,7 +326,7 @@ void selectedResult(Map singleResult){
         if(similarity > 0)
         {
         	Element e = querySelector("#hops-match");
-        	e.text = formatter.format(similarity);
+        	e.text = formatter.format(similarity) + " flavor-match";
         	e.parent.classes.remove("hidden");
         }
         else
@@ -338,7 +338,7 @@ void selectedResult(Map singleResult){
         if(similarity > 0)
         {
         	Element e = querySelector("#malt-match");
-        	e.text = formatter.format(similarity);
+        	e.text = formatter.format(similarity) + " flavor-match";
         	e.parent.classes.remove("hidden");
         }
         else
@@ -350,7 +350,7 @@ void selectedResult(Map singleResult){
 		if(similarity > 0)
         {
         	Element e = querySelector("#yeast-match");
-        	e.text = formatter.format(similarity);
+        	e.text = formatter.format(similarity) + " flavor-match";
         	e.parent.classes.remove("hidden");
         }
         else
@@ -362,7 +362,7 @@ void selectedResult(Map singleResult){
 		if(similarity > 0)
         {
         	Element e = querySelector("#abv-match");
-        	e.text = formatter.format(similarity);
+        	e.text = formatter.format(similarity) + " flavor-match";
         	e.parent.classes.remove("hidden");
         }
         else
@@ -374,7 +374,7 @@ void selectedResult(Map singleResult){
 		if(similarity > 0)
         {
         	Element e = querySelector("#ibu-match");
-        	e.text = formatter.format(similarity);
+        	e.text = formatter.format(similarity) + " flavor-match";
         	e.parent.classes.remove("hidden");
         }
         else
@@ -481,6 +481,7 @@ double confidence(Map singleResult, Map<String,double> userVector)
 	if(!hit)
     	confidence -= .01;
 	
+	print("%confidence: " + (confidence*100).toString());
 	return confidence;
 }
 

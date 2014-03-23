@@ -32,6 +32,8 @@ double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 
 	if(normalized == double.NAN)
 		normalized = 0.0;
+	
+	print("%similar: " + (normalized*100).toString());
 	return normalized;
 }
 
