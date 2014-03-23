@@ -106,7 +106,6 @@ class User
 			map[key] = value.liked/value.total;
 		});
 		
-		print(map);
 		return map;
 	}
 	
@@ -356,7 +355,6 @@ class User
 		
 		String json = toJSON();
 		localStorage["loggedIn"] = json;
-		refreshWordCloud();
 		
 		String url = "http://beersherpaapp.appspot.com/updateUser?email=$email&password=$password&user=$json";
 		HttpRequest.request(url, method: "GET").then((HttpRequest request)
@@ -453,44 +451,66 @@ class FlavorProfile
 		brewery = new Map();
 	}
 	
-	String toString()
+	String stringValue(String range)
 	{
 		String profile = "";
-		hops.forEach((String key, Liked value)
+		
+		if(range == "all" || range == "hops")
 		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
-		malt.forEach((String key, Liked value)
+			hops.forEach((String key, Liked value)
+			{
+				for(int i=0; i<value.liked; i++)
+					profile += " $key";
+			});
+		}
+		if(range == "all" || range == "malt")
+        {
+			malt.forEach((String key, Liked value)
+    		{
+    			for(int i=0; i<value.liked; i++)
+    				profile += " $key";
+    		});
+        }
+		if(range == "all" || range == "yeast")
+        {
+			yeast.forEach((String key, Liked value)
+			{
+				for(int i=0; i<value.liked; i++)
+					profile += " $key";
+			});
+        }
+		if(range == "all" || range == "ibu")
+        {
+			ibu.forEach((String key, Liked value)
+			{
+				for(int i=0; i<value.liked; i++)
+					profile += " $key";
+			});
+        }
+		if(range == "all" || range == "abv")
 		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
-		yeast.forEach((String key, Liked value)
+			abv.forEach((String key, Liked value)
+			{
+				for(int i=0; i<value.liked; i++)
+					profile += " $key";
+			});
+		}
+		if(range == "all" || range == "style")
 		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
-		ibu.forEach((String key, Liked value)
+			style.forEach((String key, Liked value)
+			{
+				for(int i=0; i<value.liked; i++)
+					profile += " $key";
+			});
+		}
+		if(range == "all" || range == "brewery")
 		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
-		abv.forEach((String key, Liked value)
-		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
-		style.forEach((String key, Liked value)
-		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
-		brewery.forEach((String key, Liked value)
-		{
-			for(int i=0; i<value.liked; i++)
-				profile += " $key";
-		});
+			brewery.forEach((String key, Liked value)
+			{
+				for(int i=0; i<value.liked; i++)
+					profile += " $key";
+			});
+		}
 		return profile;
 	}
 }
