@@ -16,8 +16,9 @@ void checkLogin()
 		querySelector("#normal-nav").classes.remove("hidden");
 		querySelector("#login-nav").classes.add("hidden");
 	}
-	else if(loggedIn == "none") //user logged out
+	else if(loggedIn == "none"){ //user logged out
     	pageDivs["landing-page"].classes.remove("hidden");
+	}
 	
 	attachListeners();
 }
@@ -67,10 +68,12 @@ void attachListeners()
 	querySelector("#li-logout").onClick.listen((MouseEvent event)
 	{
 		localStorage["loggedIn"] = "none";
-		hideAllPages();
-		pageDivs["landing-page"].classes.remove("hidden");
-    	querySelector("#normal-nav").classes.add("hidden");
-    	querySelector("#login-nav").classes.remove("hidden");
+		window.location.assign(window.location.href);//Reload the page to reset state
+		//hideAllPages();
+		//pageDivs["landing-page"].classes.remove("hidden");
+    	//querySelector("#normal-nav").classes.add("hidden");
+    	//querySelector("#login-nav").classes.remove("hidden");
+    	
 	});
 	
 	//get new user email and password fields
