@@ -7,7 +7,6 @@ void initSearch(){
   querySelector("#advice-button-submit")..onClick.listen((MouseEvent e) => advice());
   //Same for tasts textfield
   querySelector("#tastes-button-submit")..onClick.listen((MouseEvent e) => tastes());
-      
 }
 
 void Search(String query){
@@ -202,8 +201,8 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     
     
     //Set button listens
-    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e) => currentUser.like(singleResult));
-    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e) => currentUser.unlike(singleResult));
+    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e) => currentUser.like(singleResult, true));
+    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e) => currentUser.like(singleResult, false));
     
     card.classes.remove("hidden");
 }

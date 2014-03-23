@@ -2,6 +2,7 @@ library BeerSherpa;
 import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
+import 'dart:math';
 
 part 'search.dart';
 part 'account.dart';
@@ -24,6 +25,7 @@ void main()
 	initListeners();
 	
 	initSearch();
+	initRandom();
 	
 }
 
@@ -46,6 +48,9 @@ void initListeners()
 	querySelector("#li-tastes").onClick.listen((MouseEvent event)
 	{
 		hideAllPages();
+		
+		populateRandom();
+		
 		pageDivs["tastes-page"].classes.remove("hidden");
         (event.target as LIElement).classes.add("active");
         
