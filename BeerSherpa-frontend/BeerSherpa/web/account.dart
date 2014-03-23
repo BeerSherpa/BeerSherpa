@@ -146,11 +146,12 @@ void newUser(String email, String password)
 		try
 		{
 			Map map = JSON.decode(response);
-			User user = new User(email,password);
+			currentUser = new User(email,password);
 			
 			localStorage["loggedIn"] = response;
 			hideAllPages();
 			querySelector("#normal-nav").classes.remove("hidden");
+			querySelector("#li-advice").classes.add("active");
 			window.scroll(0,0);
 			pageDivs["ftu-page"].classes.remove("hidden");
 		}

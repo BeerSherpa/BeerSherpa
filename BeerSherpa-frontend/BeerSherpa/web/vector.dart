@@ -22,6 +22,8 @@ double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 	double denominator = sqrt(beerSum) * sqrt(userSum);
 	double raw = dotSum/denominator;
 	
+	print("raw: " + raw.toString());
+	
 	double normalized = (raw+1)/2;
 	if(normalized < .6)
 		normalized *= .6;
