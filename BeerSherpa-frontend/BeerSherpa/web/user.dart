@@ -10,25 +10,74 @@ class User
 		flavorProfile = new FlavorProfile();
 	}
 	
-	User.fromMap(Map map)
+	User.fromJSON(Map map)
 	{
 		email = map["email"];
 		password = map["password"];
 		flavorProfile = new FlavorProfile();
-		flavorProfile.hops = map["flavorProfile"]["hops"];
-		flavorProfile.malt = map["flavorProfile"]["malt"];
-		flavorProfile.yeast = map["flavorProfile"]["yeast"];
-		flavorProfile.ibu = map["flavorProfile"]["abv"];
-		flavorProfile.abv = map["flavorProfile"]["ibu"];
-		flavorProfile.style = map["flavorProfile"]["style"];
-		flavorProfile.brewery = map["flavorProfile"]["brewery"];
+		(map["flavorProfile"]["hops"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.hops[key] = liked;
+			});
+		});
+		(map["flavorProfile"]["malt"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.malt[key] = liked;
+			});
+		});
+		(map["flavorProfile"]["yeast"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.yeast[key] = liked;
+			});
+		});
+		(map["flavorProfile"]["ibu"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.ibu[key] = liked;
+			});
+		});
+		(map["flavorProfile"]["abv"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.abv[key] = liked;
+			});
+		});
+		(map["flavorProfile"]["style"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.style[key] = liked;
+			});
+		});
+		(map["flavorProfile"]["brewery"] as List<Map<String,Map<String,String>>>).forEach((Map map)
+		{
+			map.forEach((String key, Map<String,String> value)
+			{
+				Liked liked = new Liked(value["total"],value["liked"]);
+				flavorProfile.brewery[key] = liked;
+			});
+		});
 	}
 	
-	void like(Map map)
+	void like(Map map, bool like)
 	{
-		if(map["data"]["style"]["name"] != null)
+		if(map["style"]["name"] != null)
 		{
-			String style = map["data"]["style"]["name"];
+			String style = map["style"]["name"];
 			if(style.toLowerCase().contains("india pale ale"))
 				style = "India Pale Ale";
 			else if(style.toLowerCase().contains("pale ale"))
@@ -53,142 +102,297 @@ class User
 			if(flavorProfile.style[style] != null)
 			{
 				flavorProfile.style[style].total++;
-				flavorProfile.style[style].liked++;
+				if(like)
+					flavorProfile.style[style].liked++;
 			}
 			else
-				flavorProfile.style[style] = new Liked(1,1);
+			{
+				if(like)
+					flavorProfile.style[style] = new Liked(1,1);
+				else
+					flavorProfile.style[style] = new Liked(1,0);
+			}
 		}
-		if(map["data"]["abv"] != null)
+		if(map["abv"] != null)
 		{
-			int abv = int.parse(map["data"]["abv"]);
+			int abv = int.parse(map["abv"]);
 			if(abv <= 4.5)
 			{
 				if(flavorProfile.abv["low-abv"] != null)
 				{
 					flavorProfile.abv["low-abv"].total++;
-                    flavorProfile.abv["low-abv"].liked++;
+					if(like)
+                   		flavorProfile.abv["low-abv"].liked++;
 				}
 				else
-					flavorProfile.abv["low-abv"] = new Liked(1,1);
+				{
+					if(like)
+						flavorProfile.abv["low-abv"] = new Liked(1,1);
+					else
+						flavorProfile.abv["low-abv"] = new Liked(1,0);
+				}
 			}
 			else if(abv > 4.5 && abv <= 7)
 			{
 				if(flavorProfile.abv["mid-abv"] != null)
 				{
 					flavorProfile.abv["mid-abv"].total++;
-                    flavorProfile.abv["mid-abv"].liked++;
-				}
-				else
-					flavorProfile.abv["mid-abv"] = new Liked(1,1);
+					if(like)
+                   		flavorProfile.abv["mid-abv"].liked++;
+					}
+					else
+					{
+						if(like)
+							flavorProfile.abv["mid-abv"] = new Liked(1,1);
+						else
+							flavorProfile.abv["mid-abv"] = new Liked(1,0);
+					}
 			}
 			else
 			{
 				if(flavorProfile.abv["high-abv"] != null)
 				{
 					flavorProfile.abv["high-abv"].total++;
-                    flavorProfile.abv["high-abv"].liked++;
+					if(like)
+                   		flavorProfile.abv["high-abv"].liked++;
 				}
 				else
-					flavorProfile.abv["high-abv"] = new Liked(1,1);
+				{
+					if(like)
+						flavorProfile.abv["high-abv"] = new Liked(1,1);
+					else
+						flavorProfile.abv["high-abv"] = new Liked(1,0);
+				}
 			}
 		}
-		if(map["data"]["ibu"] != null)
+		if(map["ibu"] != null)
 		{
-			int ibu = int.parse(map["data"]["ibu"]);
+			int ibu = int.parse(map["ibu"]);
 			if(ibu <= 20)
 			{
 				if(flavorProfile.ibu["xlow-ibu"] != null)
                 {
 					flavorProfile.ibu["xlow-ibu"].total++;
-					flavorProfile.ibu["xlow-ibu"].liked++;
+					if(like)
+						flavorProfile.ibu["xlow-ibu"].liked++;
                 }
                 else
-                	flavorProfile.ibu["xlow-ibu"] = new Liked(1,1);
+                {
+                	if(like)
+                		flavorProfile.ibu["xlow-ibu"] = new Liked(1,1);
+                	else
+                		flavorProfile.ibu["xlow-ibu"] = new Liked(1,0);
+                }
 			}
 			else if(ibu > 20 && ibu <= 40)
 			{
 				if(flavorProfile.ibu["low-ibu"] != null)
                 {
 					flavorProfile.ibu["low-ibu"].total++;
-					flavorProfile.ibu["low-ibu"].liked++;
+					if(like)
+						flavorProfile.ibu["low-ibu"].liked++;
                 }
                 else
-                	flavorProfile.ibu["low-ibu"] = new Liked(1,1);
+                {
+                	if(like)
+                		flavorProfile.ibu["low-ibu"] = new Liked(1,1);
+                	else
+                		flavorProfile.ibu["low-ibu"] = new Liked(1,0);
+                }
 			}
 			else if(ibu > 40 && ibu <= 60)
 			{
 				if(flavorProfile.ibu["mid-ibu"] != null)
                 {
 					flavorProfile.ibu["mid-ibu"].total++;
-					flavorProfile.ibu["mid-ibu"].liked++;
+					if(like)
+						flavorProfile.ibu["mid-ibu"].liked++;
                 }
                 else
-                	flavorProfile.ibu["mid-ibu"] = new Liked(1,1);
+                {
+                	if(like)
+                		flavorProfile.ibu["mid-ibu"] = new Liked(1,1);
+                	else
+                		flavorProfile.ibu["mid-ibu"] = new Liked(1,0);
+                }
 			}
 			else
 			{
 				if(flavorProfile.ibu["high-ibu"] != null)
                 {
 					flavorProfile.ibu["high-ibu"].total++;
-					flavorProfile.ibu["high-ibu"].liked++;
+					if(like)
+						flavorProfile.ibu["high-ibu"].liked++;
                 }
                 else
-                	flavorProfile.ibu["high-ibu"] = new Liked(1,1);
+                {
+                	if(like)
+                		flavorProfile.ibu["high-ibu"] = new Liked(1,1);
+                	else
+                		flavorProfile.ibu["high-ibu"] = new Liked(1,0);
+                }
 			}
 		}
-		if(map["data"]["ingredients"] != null)
+		if(map["ingredients"] != null)
 		{
-			if(map["data"]["ingredients"]["hops"] != null)
+			if(map["ingredients"]["hops"] != null)
 			{
-				List<Map<String,String>> hops = map["data"]["ingredients"]["hops"];
+				List<Map<String,String>> hops = map["ingredients"]["hops"];
 				hops.forEach((Map<String,String> hop)
 				{
 					if(flavorProfile.hops["name"] != null)
 					{
 						flavorProfile.hops[hop["name"]].total++;
-						flavorProfile.hops[hop["name"]].liked++;
+						if(like)
+							flavorProfile.hops[hop["name"]].liked++;
 					}
 					else
-						flavorProfile.hops[hop["name"]] = new Liked(1,1);
+					{
+						if(like)
+							flavorProfile.hops[hop["name"]] = new Liked(1,1);
+						else
+							flavorProfile.hops[hop["name"]] = new Liked(1,0);
+					}
 				});
-				List<Map<String,String>> malts = map["data"]["ingredients"]["malt"];
+				List<Map<String,String>> malts = map["ingredients"]["malt"];
 				malts.forEach((Map<String,String> malt)
 				{
 					if(flavorProfile.malt["name"] != null)
 					{
 						flavorProfile.malt[malt["name"]].total++;
-						flavorProfile.malt[malt["name"]].liked++;
+						if(like)
+							flavorProfile.malt[malt["name"]].liked++;
 					}
 					else
-						flavorProfile.malt[malt["name"]] = new Liked(1,1);
+					{
+						if(like)
+							flavorProfile.malt[malt["name"]] = new Liked(1,1);
+						else
+							flavorProfile.malt[malt["name"]] = new Liked(1,0);
+					}
 				});
-				List<Map<String,String>> yeasts = map["data"]["ingredients"]["yeast"];
+				List<Map<String,String>> yeasts = map["ingredients"]["yeast"];
 				yeasts.forEach((Map<String,String> yeast)
 				{
 					if(flavorProfile.yeast["name"] != null)
 					{
 						flavorProfile.yeast[yeast["name"]].total++;
-						flavorProfile.yeast[yeast["name"]].liked++;
+						if(like)
+							flavorProfile.yeast[yeast["name"]].liked++;
 					}
 					else
-						flavorProfile.yeast[yeast["name"]] = new Liked(1,1);
+					{
+						if(like)
+							flavorProfile.yeast[yeast["name"]] = new Liked(1,1);
+						else
+							flavorProfile.yeast[yeast["name"]] = new Liked(1,0);
+					}
 				});
 			}
 		}
-		if(map["data"]["breweries"] != null)
+		if(map["breweries"] != null)
 		{
-			List<Map<String,String>> breweries = map["data"]["breweries"];
+			List<Map<String,String>> breweries = map["breweries"];
 			breweries.forEach((Map<String,String> brewery)
 			{
 				if(flavorProfile.brewery["name"] != null)
 				{
 					flavorProfile.brewery[brewery["name"]].total++;
-					flavorProfile.brewery[brewery["name"]].liked++;
+					if(like)
+						flavorProfile.brewery[brewery["name"]].liked++;
 				}
 				else
-					flavorProfile.brewery[brewery["name"]] = new Liked(1,1);
+				{
+					if(like)
+						flavorProfile.brewery[brewery["name"]] = new Liked(1,1);
+					else
+						flavorProfile.brewery[brewery["name"]] = new Liked(1,0);
+				}
 			});
 		}
+		
+		String json = toJSON();
+		localStorage["loggedIn"] = json;
+		refreshWordCloud();
+		
+		String url = "http://beersherpaapp.appspot.com/updateUser?email=$email&password=$password&user=$json";
+		HttpRequest.request(url, method: "GET").then((HttpRequest request)
+		{
+			//print(request.responseText);
+		});
+	}
+	
+	String toJSON()
+	{
+		String jsonString = '{';
+		jsonString += '"email":"$email",';
+		jsonString += '"password":"$password",';
+		jsonString += '"flavorProfile":{';
+		
+		jsonString += '"hops":[';
+		flavorProfile.hops.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "],";
+		
+		jsonString += '"malt":[';
+		flavorProfile.malt.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "],";
+		
+		jsonString += '"yeast":[';
+		flavorProfile.yeast.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "],";
+
+		jsonString += '"ibu":[';
+		flavorProfile.ibu.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "],";
+
+		jsonString += '"abv":[';
+		flavorProfile.abv.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "],";
+        		
+		jsonString += '"style":[';
+		flavorProfile.style.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "],";
+        		
+		jsonString += '"brewery":[';
+		flavorProfile.brewery.forEach((String key, Liked value)
+		{
+			jsonString += '{"$key":{"liked":"${value.liked}", "total":"${value.total}"}},';
+		});
+		if(jsonString.endsWith(","))
+        	jsonString = jsonString.substring(0, jsonString.length-1); //cut off last ','
+		jsonString += "]}}";
+        				
+		return jsonString;
 	}
 }
 
@@ -253,5 +457,17 @@ class Liked
 {
 	int total, liked;
 	
-	Liked(this.total,this.liked);
+	Liked(var total,var liked)
+	{
+		try
+		{
+			this.total = int.parse(total);
+			this.liked = int.parse(liked);
+		}
+		catch(error)
+		{
+			this.total = total;
+			this.liked = liked;
+		}
+	}
 }

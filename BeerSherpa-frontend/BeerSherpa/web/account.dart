@@ -11,7 +11,7 @@ void checkLogin()
 		pageDivs["landing-page"].classes.remove("hidden");
 	else if(loggedIn != "none") //someone has logged in
 	{
-		currentUser = new User.fromMap(JSON.decode(loggedIn));
+		currentUser = new User.fromJSON(JSON.decode(loggedIn));
 		pageDivs["advice-page"].classes.remove("hidden");
 		querySelector("#normal-nav").classes.remove("hidden");
 		querySelector("#login-nav").classes.add("hidden");
@@ -37,7 +37,7 @@ void loginUser(String email, String password)
 		
 		try
 		{
-			currentUser = new User.fromMap(JSON.decode(response));
+			currentUser = new User.fromJSON(JSON.decode(response));
 					
 			localStorage["loggedIn"] = response;
         	pageDivs["advice-page"].classes.remove("hidden");
@@ -46,9 +46,12 @@ void loginUser(String email, String password)
         	hideAllPages();
         	pageDivs["advice-page"].classes.remove("hidden");
         	querySelector("#li-advice").classes.add("active");
+        	
+			refreshWordCloud();
 		}
 		catch(error) //couldn't login with given credentials
 		{
+			print("error logging in: $error");
 			InputElement loginEmail = querySelector("#navbar-input-email");
 			InputElement loginPassword = querySelector("#navbar-input-password");
 			addWarning(loginEmail,"remove","has-error");

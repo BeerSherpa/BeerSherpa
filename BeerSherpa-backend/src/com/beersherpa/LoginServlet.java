@@ -42,25 +42,28 @@ public class LoginServlet extends HttpServlet
 				fail(resp);
 			
 			User u = new User();
-			u.email = email;
-			u.password = password;
 			
-			Blob profile = (Blob)user.getProperty("flavorProfile");
+			Blob profile = (Blob)user.getProperty("userObject");
 			if(profile != null)
 			{
 				try
 				{
 					ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(profile.getBytes()));
-					u.flavorProfile = (FlavorProfile) ois.readObject();
+					u = (User) ois.readObject();
 				}
 				catch(ClassNotFoundException ex){}
 			}
 			else
+			{
+				u.email = email;
+				u.password = password;
 				u.flavorProfile = new FlavorProfile();
+			}
 			
 			resp.setContentType("application/json");
 			Gson gson = new Gson();
 			String json = gson.toJson(u);
+			System.out.println("logged in: " + json);
 			resp.getWriter().print(json);
 		}
 	}

@@ -36,22 +36,22 @@ public class CreateUserServlet extends HttpServlet
 		Entity user = getUserEntity(email);
 		if(user == null)
 		{
+			User u = new User();
+			u.email = email;
+			u.password = password;
+			u.flavorProfile = new FlavorProfile();
+			
 			user = new Entity("User",email);
 			user.setProperty("email", email);
 			user.setProperty("password", password);
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			ObjectOutputStream os = new ObjectOutputStream(stream);
-			os.writeObject(new FlavorProfile());
-			Blob profile = new Blob(stream.toByteArray());
-			user.setProperty("flavorProfile", profile);
+			os.writeObject(u);
+			Blob blob = new Blob(stream.toByteArray());
+			user.setProperty("userObject", blob);
 			
 			memcache.put(user, "user_"+email);
 			datastore.put(user);
-			
-			User u = new User();
-			u.email = email;
-			u.password = password;
-			u.flavorProfile = new FlavorProfile();
 			
 			resp.setContentType("application/json");
 			Gson gson = new Gson();

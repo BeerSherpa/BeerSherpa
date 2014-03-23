@@ -31,8 +31,11 @@ public class UpdateUserServlet extends HttpServlet
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");
 		
+		String userString = (String) req.getParameter("user");
+		userString.replace("%22", "\"");
+		
 		Gson gson = new Gson();
-		FlavorProfile flavorProfile = gson.fromJson(req.getParameter("flavorProfile"), FlavorProfile.class);
+		User u = gson.fromJson(userString, User.class);
 		
 		Entity user = getUserEntity(email);
 		if(user == null)
@@ -44,9 +47,9 @@ public class UpdateUserServlet extends HttpServlet
 		{
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			ObjectOutputStream os = new ObjectOutputStream(stream);
-			os.writeObject(flavorProfile);
-			Blob profile = new Blob(stream.toByteArray());
-			user.setProperty("flavorProfile", profile);
+			os.writeObject(u);
+			Blob blob = new Blob(stream.toByteArray());
+			user.setProperty("userObject", blob);
 			user.setProperty("password", password);
 			
 			memcache.put(user, "user_"+email);

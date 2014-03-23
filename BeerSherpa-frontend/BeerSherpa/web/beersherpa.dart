@@ -56,19 +56,6 @@ void initListeners()
 		hideAllPages();
 		pageDivs["profile-page"].classes.remove("hidden");
         (event.target as LIElement).classes.add("active");
-        
-        //refresh the word cloud
-        getWordCloudUrl().then((String url)
-		{
-        	ImageElement img = new ImageElement()
-        		..src = url
-        		..className = "img-responsive img-rounded center-block";
-        	img.onLoad.listen((_)
-    		{
-        		querySelector("#wordcloud-row").children.clear();
-        		querySelector("#wordcloud-row").append(img);
-    		});
-		});
 	});
 }
 

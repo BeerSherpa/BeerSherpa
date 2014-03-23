@@ -12,4 +12,9 @@ public class Liked implements Serializable
 		this.liked = liked;
 		this.total = total;
 	}
+	
+	Liked()
+	{
+		
+	}
 }
