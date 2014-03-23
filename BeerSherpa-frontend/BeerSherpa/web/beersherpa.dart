@@ -17,6 +17,7 @@ Storage localStorage = window.localStorage;
 void main() 
 {
 	pageDivs["landing-page"] = querySelector("#landing-page");
+	pageDivs["ftu-page"] = querySelector("#ftu-page");
 	pageDivs["advice-page"] = querySelector("#advice-page");
 	pageDivs["tastes-page"] = querySelector("#tastes-page");
 	pageDivs["profile-page"] = querySelector("#profile-page");

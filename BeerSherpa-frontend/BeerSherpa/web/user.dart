@@ -442,7 +442,6 @@ class User
 class FlavorProfile
 {
 	Map<String,Liked> hops, malt, yeast, abv, ibu, style, brewery;
-	
 	FlavorProfile()
 	{
 		hops = new Map();

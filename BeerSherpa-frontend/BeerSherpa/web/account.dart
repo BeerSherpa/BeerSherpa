@@ -151,7 +151,8 @@ void newUser(String email, String password)
 			localStorage["loggedIn"] = response;
 			hideAllPages();
 			querySelector("#normal-nav").classes.remove("hidden");
-			pageDivs["advice-page"].classes.remove("hidden");
+			window.scroll(0,0);
+			pageDivs["ftu-page"].classes.remove("hidden");
 		}
 		catch(error)
 		{

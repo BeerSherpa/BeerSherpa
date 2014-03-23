@@ -3,8 +3,19 @@ part of BeerSherpa;
 //init a list of beer id's 
 List beerids = ["L7OSOj", "8vBYrZ", "qeXBVh", "hj7N75", "ULQE3L", "w1ndc4", "z4k3eU", "vbJQ8t", "Lf1c6i", "iqX54w", "baONtD", "9GtCUG", "yy3cTm", "m3xewW", "cJio9R", "WHQisc", "odItSS", "Uiol9p", "UD5Sm4", "CrEWhc", "Gkd1YS", "eqtMQs", "X4JKZd", "9kidXn", "UpiAAy", "25lKg4", "I4vp71", "187kFc", "rtMecd", "tPayGU", "zYJxUM", "KY5gtZ", "pBfN8o", "CJpcWg", "lHlnqe", "EiCuSk", "RVOBIF", "Q9PlwV"];
 
+Map currentData;
+
 void initRandom(){
   querySelector("#rate-button-skip")..onClick.listen((MouseEvent e) => skip());
+  //Listeners for yak / yum 
+  querySelector("#rate-button-yum")..onClick.listen((MouseEvent e) {
+    currentUser.like(currentData, true);
+    populateRandom();
+  });
+  querySelector("#rate-button-yuk")..onClick.listen((MouseEvent e) {
+    currentUser.like(currentData, false);
+    populateRandom();
+  }); 
 }
 
 //get a random one
@@ -29,7 +40,7 @@ void buildResult(String responseText) {
   
   Map dataMap = parsedMap["data"];
   
-  print(dataMap);
+  currentData = dataMap;
     
   DivElement jumbotron = querySelector("#rate-jumbotron");
   
@@ -49,15 +60,7 @@ void buildResult(String responseText) {
     jumbotron.querySelector("#rate-img").setAttribute("src", imgs["medium"]);
   }
   
-  //Listeners for yak / yum 
-  querySelector("#rate-button-yum")..onClick.listen((MouseEvent e) {
-    currentUser.like(dataMap, true);
-    populateRandom();
-  });
-  querySelector("#rate-button-yuk")..onClick.listen((MouseEvent e) {
-    currentUser.like(dataMap, false);
-    populateRandom();
-  }); 
+
    
 }
 
