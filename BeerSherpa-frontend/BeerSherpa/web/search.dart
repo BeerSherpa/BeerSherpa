@@ -203,12 +203,12 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     
     
     //Set button listens
-    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e)
+    card.querySelector(".beer-yum")..onClick.first.then((MouseEvent e)
     {
     	currentUser.like(singleResult, true);
     	fadeCard(card);
     });
-    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e)
+    card.querySelector(".beer-yuk")..onClick.first.then((MouseEvent e)
   	{
   		currentUser.like(singleResult, false);
   		fadeCard(card);
