@@ -125,7 +125,7 @@ void showResults(String responseText) {
  */
 void addResult(Map singleResult, UListElement ul, Map images){
   
-  LIElement newli = new LIElement()..setAttribute("data-dismiss", "modal")..onClick.listen((MouseEvent e) => selectedResult(singleResult));
+  LIElement newli = new LIElement()..className="result-li"..setAttribute("data-dismiss", "modal")..onClick.listen((MouseEvent e) => selectedResult(singleResult));
   DivElement row = new DivElement()..className="row";
   DivElement col4 = new DivElement()..className="col-sm-4";
   DivElement col8 = new DivElement()..className="col-sm-8"..text="${singleResult["description"]}";
@@ -252,6 +252,15 @@ void fadeCard(Element card)
 void fadeFtuCard()
 {
   querySelector("#ftu-page").classes.add("fade");
+  querySelector("#ftu-style-jumbotron").querySelectorAll("input").forEach((Element e) {
+   
+    String style = e.id;
+    
+    if((e as InputElement).checked){
+      currentUser.flavorProfile.style[style]=new Liked(1.0,1.0);
+    }
+    
+  });
   new Timer.periodic(new Duration(seconds:1), (Timer timer)
   {
     timer.cancel();

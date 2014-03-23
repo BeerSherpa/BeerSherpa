@@ -110,8 +110,10 @@ class User
 	
   void like(Map map, bool like)
 	{
-    print(map);
-		if(map["style"]["name"] != null)
+    
+    Map styleMap = map["style"];
+    
+		if(styleMap != null && styleMap["name"] != null)
 		{
 			String style = map["style"]["name"];
 			if(style.toLowerCase().contains("india pale ale"))
