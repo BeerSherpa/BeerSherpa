@@ -201,10 +201,29 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     
     
     //Set button listens
-    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e) => currentUser.like(singleResult, true));
-    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e) => currentUser.like(singleResult, false));
+    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e)
+    {
+    	currentUser.like(singleResult, true);
+    	fadeCard(querySelector("#advice-beer-card"));
+    });
+    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e)
+	{
+		currentUser.like(singleResult, false);
+		fadeCard(querySelector("#advice-beer-card"));
+	});
     
     card.classes.remove("hidden");
+}
+
+void fadeCard(Element card)
+{
+	card.classes.add("fade");
+	new Timer.periodic(new Duration(seconds:1), (Timer timer)
+	{
+		timer.cancel();
+		card.classes.remove("fade");
+		card.classes.add("hidden");
+	});
 }
 
 
@@ -221,6 +240,8 @@ void selectedResult(Map singleResult){
     querySelector("#results-jumbotron").classes.remove("hidden");
     DivElement card = querySelector("#advice-beer-card");   
     createBeerInfoCard(card, singleResult);
+    
+    double similarity = getDistance(getBeerVector(singleResult),currentUser.getVector());
     
     //format the styling
     
