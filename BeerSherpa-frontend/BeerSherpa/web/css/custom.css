@@ -69,3 +69,7 @@ ul.nav li.active{
     transition-timing-function: ease-in-out;
 }
 
+.result-li:hover{
+	cursor: pointer;
+}
+

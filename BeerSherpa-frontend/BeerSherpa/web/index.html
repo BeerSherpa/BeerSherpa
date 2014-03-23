@@ -140,20 +140,20 @@
         <div class="row">
           <div class="col-sm-6">
             <ul class="list-group">
-              <li class="list-group-item"><input type="checkbox"> Ale</li>
-              <li class="list-group-item"><input type="checkbox"> Lager</li>
-              <li class="list-group-item"><input type="checkbox"> Pilsner</li>
-              <li class="list-group-item"><input type="checkbox"> Wheat</li>
-              <li class="list-group-item"><input type="checkbox"> Pale Ale</li>
+              <li class="list-group-item"><input id="Ale" type="checkbox"> Ale</li>
+              <li class="list-group-item"><input id="Lager" type="checkbox"> Lager</li>
+              <li class="list-group-item"><input id="Pilsner" type="checkbox"> Pilsner</li>
+              <li class="list-group-item"><input id="Wheat" type="checkbox"> Wheat</li>
+              <li class="list-group-item"><input id="Pale Ale" type="checkbox"> Pale Ale</li>
             </ul>
           </div>
           <div class="col-sm-6">
             <ul class="list-unstyled">
-              <li class="list-group-item"><input type="checkbox"> IPA</li>
-              <li class="list-group-item"><input type="checkbox"> Stout</li>
-              <li class="list-group-item"><input type="checkbox"> Porter</li>
-              <li class="list-group-item"><input type="checkbox"> Bock</li>
-              <li class="list-group-item"><input type="checkbox"> Amber</li>
+              <li class="list-group-item"><input id="India Pale Ale" type="checkbox"> IPA</li>
+              <li class="list-group-item"><input id="Stout" type="checkbox"> Stout</li>
+              <li class="list-group-item"><input id="Porter" type="checkbox"> Porter</li>
+              <li class="list-group-item"><input id="Bock" type="checkbox"> Bock</li>
+              <li class="list-group-item"><input id="Amber" type="checkbox"> Amber</li>
             </ul>
           </div>
         </div>
@@ -194,7 +194,7 @@
               </div>
               <div class="col-md-3" id="beer-info-ratecol">
                 <h3>Click yum if you like this!</h3>
-                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <button id="ftu-yum" class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
                 <br />
                 <button class="btn btn-lg btn-block btn-danger beer-yuk hidden" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
               </div>
@@ -225,34 +225,6 @@
           </div><!--/ col-lg-6 -->
         </div><!--/ row -->
       </div><!--/ jumbotron-->
-
-      <br />
-
-      <div id="advice-beer-card" class="hidden">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title beer-title">Title</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-3 beer-img">
-
-              </div>
-              <div class="col-md-6">
-                <h3>Description <span class="label hidden label-default beer-label beer-abv"></span> <span class="label label-default beer-label hidden beer-ibu"></span></h3>
-                <div class="beer-desc">
-                </div>
-                <br />
-              </div>
-              <div class="col-sm-3" id="beer-info-ratecol">
-                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
-                <br />
-                <button class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
-              </div>
-            </div>
-          </div>
-        </div><!--/ panel-->
-      </div><!--/ beer-info -->
 
       <br />
 
@@ -311,6 +283,36 @@
             </div>
         </div>
       </div> <!--/ results-jumbotron-->
+
+      <br />
+
+      <div id="advice-beer-card" class="hidden">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title beer-title">Title</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3 beer-img">
+
+              </div>
+              <div class="col-md-6">
+                <h3>Description <span class="label hidden label-default beer-label beer-abv"></span> <span class="label label-default beer-label hidden beer-ibu"></span></h3>
+                <div class="beer-desc">
+                </div>
+                <br />
+              </div>
+              <div class="col-sm-3" id="beer-info-ratecol">
+                <button id="advice-yum" class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <br />
+                <button id="advice-yuk" class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
+              </div>
+            </div>
+          </div>
+        </div><!--/ panel-->
+      </div><!--/ beer-info -->
+
+      
     </div><!--/ advice page (2) -->
 
 
@@ -352,9 +354,9 @@
                 </div>
               </div>
               <div class="col-md-3" id="beer-info-ratecol">
-                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <button id="tastes-yum" class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
                 <br />
-                <button class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
+                <button id="tastes-yuk" class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
               </div>
             </div>
           </div>
@@ -414,7 +416,7 @@
                 <button id="hops-wordcloud-button" type="button" class="wordcloud-button btn btn-default">Hops</button>
               </div>
               <div class="btn-group">
-                <button id="malt-wordcloud-button" type="button" class="wordcloud-button btn btn-default">Malts, Grains, &amp; Fermentables</button>
+                <button id="malt-wordcloud-button" type="button" class="wordcloud-button btn btn-default">Malts</button>
               </div>
             </div>
           </div>
@@ -464,6 +466,7 @@
         </div>
         <div class="modal-body">
           <div id="scroll-results">
+
           </div>
         </div>
         <div class="modal-footer">
@@ -473,8 +476,6 @@
     </div>
   </div>
   <!-- END MODAL -->
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

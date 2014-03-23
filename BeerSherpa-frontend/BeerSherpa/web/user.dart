@@ -12,7 +12,6 @@ class User
 	
 	User.fromJSON(Map map)
 	{
-		print(map);
 		email = map["email"];
 		password = map["password"];
 		flavorProfile = new FlavorProfile();
@@ -109,9 +108,12 @@ class User
 		return map;
 	}
 	
-	void like(Map map, bool like)
+  void like(Map map, bool like)
 	{
-		if(map["style"]["name"] != null)
+    
+    Map styleMap = map["style"];
+    
+		if(styleMap != null && styleMap["name"] != null)
 		{
 			String style = map["style"]["name"];
 			if(style.toLowerCase().contains("india pale ale"))
