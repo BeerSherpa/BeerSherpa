@@ -1,7 +1,5 @@
 function execute(wordList)
 {
-console.log(wordList);
-
   d3.layout.cloud().size([800, 400])
       .words(wordList.map(function(d) {
         return {text: d, size: 10 + Math.random() * 90};
