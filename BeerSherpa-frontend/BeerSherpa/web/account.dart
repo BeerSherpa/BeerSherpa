@@ -50,6 +50,7 @@ void loginUser(String email, String password)
         	querySelector("#li-advice").classes.add("active");
         	
 			refreshWordCloud("all");
+			 initRandom();
 		}
 		catch(error) //couldn't login with given credentials
 		{

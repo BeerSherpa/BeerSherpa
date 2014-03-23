@@ -18,7 +18,7 @@ void initRandom(){
     populateTrack();
   }); 
   
-  currentNumber = currentUser.getIndex();
+  currentNumber = currentUser.index;
   
   populateTrack();
   
@@ -28,7 +28,7 @@ void initRandom(){
 void populateTrack(){
   if(currentNumber < beerids.length){
     int trackIndex = currentNumber++;
-    currentUser.setIndex(currentNumber);
+    currentUser.index = currentNumber;
     String id = beerids[trackIndex];
      //Create url 
     String url = "http://beersherpaapp.appspot.com/api?endpoint=beer/$id&withBreweries=Y";
@@ -40,6 +40,58 @@ void populateTrack(){
 }
 
 void populateRandom(){
+  //get header info
+  String url = "http://beersherpaapp.appspot.com/api?endpoint=beers&hasLabels=Y";
+  var request = HttpRequest.getString(url).then(parseHeader);
+ 
+}
+
+void parseHeader(String responseText){
+  
+  String jsonString = responseText;
+  //Decode the response
+  Map parsedMap = JSON.decode(jsonString);
+  int totalPages = parsedMap["numberOfPages"];
+  
+  print(totalPages);
+  
+  Random rnd = new Random(); //get new random number, max total pages
+  
+  int randPage = rnd.nextInt(totalPages);
+  
+  if(randPage == 0){
+    randPage = 1; //sanity
+  }
+  
+  print(randPage.toString());
+  
+  //get actual info
+  String url = "http://beersherpaapp.appspot.com/api?endpoint=beers&p=$randPage&hasLabels=Y&withBreweries=Y&withIngredients=Y";
+  var request = HttpRequest.getString(url).then(getRandData);
+  
+  
+}
+
+void getRandData(String responseText){
+  
+  String jsonString = responseText;
+   //Decode the response
+   Map parsedMap = JSON.decode(jsonString);
+   List data = parsedMap["data"];
+   
+   int numItems = data.length;
+   
+   Random rnd = new Random();
+   
+   int randIndex = rnd.nextInt(numItems);
+   
+   String id = data[randIndex]["id"];
+   
+   
+   //Create url 
+   String url = "http://beersherpaapp.appspot.com/api?endpoint=beer/$id&withBreweries=Y";
+   //Send request
+   var request = HttpRequest.getString(url).then(buildResult);
   
 }
 

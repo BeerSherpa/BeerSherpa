@@ -31,8 +31,6 @@ void main()
 	
 	initSearch();
 	 initProfile();
-	 
-	initRandom();
 
 }
 
