@@ -6,6 +6,12 @@ class User
 	FlavorProfile flavorProfile;
 	int numHits = 0, index = 0;
 	
+	int getIndex() => index;
+	void setIndex(int index)
+	{
+		this.index = index;
+	}
+	
 	User(this.email,this.password)
 	{
 		flavorProfile = new FlavorProfile();
