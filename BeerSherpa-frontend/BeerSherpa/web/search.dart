@@ -291,10 +291,22 @@ void selectedResult(Map singleResult){
     
     if(currentUser != null)
     {
-    	double similarity = getDistance(getBeerVector(singleResult),currentUser.getVector());
+    	Map<String,double> userVector = currentUser.getVector();
+    	
+    	double similarity = getDistance(getBeerVector(singleResult),userVector);
         querySelector("#distance").text = formatter.format(similarity);
+        if(similarity <= .25)
+        	querySelector("#love-word").text = "Hate";
+        else if(similarity > .25 && similarity <= .50)
+        	querySelector("#love-word").text = "Tolerate";
+        else if(similarity > .50 && similarity <= .75)
+            querySelector("#love-word").text = "Like";
+        else if(similarity > .75)
+            querySelector("#love-word").text = "Love";
         
-        similarity = getDistance(getBeerVector(singleResult,type:"hops"),currentUser.getVector());
+        Map<String,double> hopsVector = getBeerVector(singleResult,type:"hops");
+        hopsVector.forEach((String name, double value) => buildList("hops",name,userVector));
+        similarity = getDistance(hopsVector,userVector);
         if(similarity > 0)
         {
         	Element e = querySelector("#hops-match");
@@ -304,7 +316,9 @@ void selectedResult(Map singleResult){
         else
         	querySelector("#hops-match").parent.classes.add("hidden");
         
-        similarity = getDistance(getBeerVector(singleResult,type:"malt"),currentUser.getVector());
+        Map<String,double> maltVector = getBeerVector(singleResult,type:"malt");
+        maltVector.forEach((String name, double value) => buildList("malt",name,userVector));
+        similarity = getDistance(maltVector,userVector);
         if(similarity > 0)
         {
         	Element e = querySelector("#malt-match");
@@ -314,7 +328,9 @@ void selectedResult(Map singleResult){
         else
         	querySelector("#malt-match").parent.classes.add("hidden");
         
-		similarity = getDistance(getBeerVector(singleResult,type:"yeast"),currentUser.getVector());
+        Map<String,double> yeastVector = getBeerVector(singleResult,type:"yeast");
+        hopsVector.forEach((String name, double value) => buildList("yeast",name,userVector));
+		similarity = getDistance(yeastVector,userVector);
 		if(similarity > 0)
         {
         	Element e = querySelector("#yeast-match");
@@ -324,7 +340,9 @@ void selectedResult(Map singleResult){
         else
         	querySelector("#yeast-match").parent.classes.add("hidden");
 		
-		similarity = getDistance(getBeerVector(singleResult,type:"abv"),currentUser.getVector());
+		Map<String,double> abvVector = getBeerVector(singleResult,type:"abv");
+        abvVector.forEach((String name, double value) => buildList("abv",name,userVector));
+		similarity = getDistance(abvVector,userVector);
 		if(similarity > 0)
         {
         	Element e = querySelector("#abv-match");
@@ -334,7 +352,9 @@ void selectedResult(Map singleResult){
         else
         	querySelector("#abv-match").parent.classes.add("hidden");
 		
-		similarity = getDistance(getBeerVector(singleResult,type:"ibu"),currentUser.getVector());
+		Map<String,double> ibuVector = getBeerVector(singleResult,type:"ibu");
+        ibuVector.forEach((String name, double value) => buildList("ibu",name,userVector));
+		similarity = getDistance(ibuVector,userVector);
 		if(similarity > 0)
         {
         	Element e = querySelector("#ibu-match");
@@ -346,14 +366,14 @@ void selectedResult(Map singleResult){
 		
 		getBeerVector(singleResult,type:"brewery").forEach((String name,double score)
 		{
-			if(currentUser.getVector().containsKey(name))
+			if(userVector.containsKey(name))
 				querySelector("#fav-brewery").classes.remove("hidden");
 			else
 				querySelector("#fav-brewery").classes.add("hidden");
 		});
 		getBeerVector(singleResult,type:"style").forEach((String name,double score)
 		{
-			if(currentUser.getVector().containsKey(name))
+			if(userVector.containsKey(name))
 				querySelector("#fav-style").classes.remove("hidden");
 			else
 				querySelector("#fav-style").classes.add("hidden");
@@ -377,6 +397,17 @@ void selectedResult(Map singleResult){
   }
   
   
+}
+
+void buildList(String type, String name, Map userVector)
+{
+	AnchorElement element = new AnchorElement();
+	if(userVector[name] != null)
+		element.className = "list-group-item list-group-item-success";
+	else
+		element.className = "list-group-item";
+	element.text = name;
+	querySelector("#$type-list-group").append(element);
 }
 
 void advice(){ //cant implement keyboard listener until we figure out how to triggle a data-toggle for the modal
