@@ -39,7 +39,6 @@ void loginUser(String email, String password)
 		try
 		{
 			currentUser = new User.fromJSON(JSON.decode(response));
-			print(currentUser.getVector());
 					
 			localStorage["loggedIn"] = response;
         	pageDivs["advice-page"].classes.remove("hidden");
