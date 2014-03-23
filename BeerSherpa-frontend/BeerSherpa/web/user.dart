@@ -116,6 +116,8 @@ class User
 			String style = map["style"]["name"];
 			if(style.toLowerCase().contains("india pale ale"))
 				style = "India Pale Ale";
+			else if(style.toLowerCase().contains("ipa"))
+				style = "India Pale Ale";
 			else if(style.toLowerCase().contains("pale ale"))
 				style = "Pale Ale";
 			else if(style.toLowerCase().contains("ale"))
