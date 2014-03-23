@@ -3,3 +3,4 @@ description: Pandora for Beer.  Contest entry for the 2014 Pitt CSDay Hackathon 
 dependencies:
   browser: any
   intl: any
+  js: any

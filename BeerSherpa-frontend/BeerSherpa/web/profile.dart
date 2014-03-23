@@ -15,14 +15,17 @@ void initProfile()
 void refreshWordCloud(String type)
 {
 	String text = currentUser.flavorProfile.stringValue(type);
-	querySelector("#spinner-img").classes.remove("hidden");
 	querySelector("#profile-wordcloud-jumbotron").classes.remove("hidden");
 	if(querySelector("#wordcloud-img") != null)
     	querySelector("#wordcloud-img").remove();
 	
 	window.scrollTo(0, querySelector("#profile-wordcloud-jumbotron").offsetTop);
 	
-	getWordCloudUrl(text).then((String url)
+	List wordList = text.split(" ");
+	wordList.removeAt(0);
+	js.context.execute(new JsObject.jsify(wordList));
+	
+	/*getWordCloudUrl(text).then((String url)
 	{
       	ImageElement img = new ImageElement()
       		..src = url
@@ -33,11 +36,15 @@ void refreshWordCloud(String type)
       		querySelector("#spinner-img").classes.add("hidden");
       		querySelector("#wordcloud-row").append(img);
   		});
-	});
+	});*/
 }
 
 Future<String> getWordCloudUrl(String text)
 {
+	List wordList = text.split(" ");
+	wordList.removeAt(0);
+	js.context.execute(new JsObject.jsify(wordList));
+	
 	Completer c = new Completer();
 	
 	text = Uri.encodeComponent(text);

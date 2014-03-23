@@ -3,7 +3,9 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:math';
+import 'dart:js';
 import 'package:intl/intl.dart'; //used for NumberFormat
+import 'package:js/js.dart' as js;
 
 part 'search.dart';
 part 'account.dart';
