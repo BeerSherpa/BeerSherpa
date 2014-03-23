@@ -4,6 +4,7 @@ int MAX_RESULTS = 40; //Limit search to x results (note: we only consider beers 
 
 var currentResult;
 var currentCard;
+NumberFormat formatter = new NumberFormat("##%");
 
 
 void initSearch(){
@@ -236,7 +237,7 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     currentResult = singleResult;
     
     card.classes.remove("hidden");
-    window.scroll(0, card.offsetTop);
+    window.scroll(0, querySelector("#results-jumbotron").offsetTop-70);
 }
 
 void fadeCard(Element card)
@@ -292,7 +293,72 @@ void selectedResult(Map singleResult){
     if(currentUser != null)
     {
     	double similarity = getDistance(getBeerVector(singleResult),currentUser.getVector());
-        querySelector("#distance").text = similarity.toString();
+        querySelector("#distance").text = formatter.format(similarity);
+        
+        similarity = getDistance(getBeerVector(singleResult,type:"hops"),currentUser.getVector());
+        if(similarity > 0)
+        {
+        	Element e = querySelector("#hops-match");
+        	e.text = formatter.format(similarity);
+        	e.parent.classes.remove("hidden");
+        }
+        else
+        	querySelector("#hops-match").parent.classes.add("hidden");
+        
+        similarity = getDistance(getBeerVector(singleResult,type:"malt"),currentUser.getVector());
+        if(similarity > 0)
+        {
+        	Element e = querySelector("#malt-match");
+        	e.text = formatter.format(similarity);
+        	e.parent.classes.remove("hidden");
+        }
+        else
+        	querySelector("#malt-match").parent.classes.add("hidden");
+        
+		similarity = getDistance(getBeerVector(singleResult,type:"yeast"),currentUser.getVector());
+		if(similarity > 0)
+        {
+        	Element e = querySelector("#yeast-match");
+        	e.text = formatter.format(similarity);
+        	e.parent.classes.remove("hidden");
+        }
+        else
+        	querySelector("#yeast-match").parent.classes.add("hidden");
+		
+		similarity = getDistance(getBeerVector(singleResult,type:"abv"),currentUser.getVector());
+		if(similarity > 0)
+        {
+        	Element e = querySelector("#abv-match");
+        	e.text = formatter.format(similarity);
+        	e.parent.classes.remove("hidden");
+        }
+        else
+        	querySelector("#abv-match").parent.classes.add("hidden");
+		
+		similarity = getDistance(getBeerVector(singleResult,type:"ibu"),currentUser.getVector());
+		if(similarity > 0)
+        {
+        	Element e = querySelector("#ibu-match");
+        	e.text = formatter.format(similarity);
+        	e.parent.classes.remove("hidden");
+        }
+        else
+        	querySelector("#ibu-match").parent.classes.add("hidden");
+		
+		getBeerVector(singleResult,type:"brewery").forEach((String name,double score)
+		{
+			if(currentUser.getVector().containsKey(name))
+				querySelector("#fav-brewery").classes.remove("hidden");
+			else
+				querySelector("#fav-brewery").classes.add("hidden");
+		});
+		getBeerVector(singleResult,type:"style").forEach((String name,double score)
+		{
+			if(currentUser.getVector().containsKey(name))
+				querySelector("#fav-style").classes.remove("hidden");
+			else
+				querySelector("#fav-style").classes.add("hidden");
+		});
     }
     
     //format the styling

@@ -2,3 +2,5 @@ name: BeerSherpa
 description: Pandora for Beer.  Contest entry for the 2014 Pitt CSDay Hackathon by Buck Young and Robert McDermot
 dependencies:
   browser: any
+  intl: any
+  js: any

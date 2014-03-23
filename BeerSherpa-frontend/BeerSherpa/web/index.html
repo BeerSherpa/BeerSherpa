@@ -230,42 +230,47 @@
 
       <div id="results-jumbotron" class="jumbotron hidden">
 		<div id="distance"></div>
-        <h1><small>You'll</small> Love <small>this beer!</small></h1>
+        <h1><small>You'll</small><span id="love-word">Love</span><small>this beer!</small></h1>
         <p class="text-muted">The Sherpa is 87% sure.</p>
 
         <div class="row">
           <h2>Here's why:</h2>
         </div>
 
-        <!--<div class="row">
-          <div class="col-md-4">
+        <div class="row">
+          <div id="fav-brewery" class="col-md-4 hidden">
             <ul class="list-group">
               <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favorite Brewery!</li>
             </ul>
           </div>
-          <div class="col-md-4">
+          <div id="fav-style" class="col-md-4 hidden">
             <ul class="list-group">
               <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favorite Style!</li>
             </ul>
           </div>
-        </div>-->
+        </div>
 
         <div class="row">
           <div class="col-md-4">
             <h4>Hops</h4>
-            <p class="text-muted">68% flavor-match</p>
-            <p class="text-justify">Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+            <p id="hops-match" class="text-muted">68% flavor-match</p>
+            <div class="list-group">
+			  <a class="list-group-item list-group-item-success">Dapibus ac facilisis in</a>
+			  <a class="list-group-item">Morbi leo risus</a>
+			  <a class="list-group-item">Porta ac consectetur ac</a>
+			  <a class="list-group-item">Vestibulum at eros</a>
+			</div>
           </div>
 
           <div class="col-md-4">
             <h4>Malts &amp; Fermentables</h4>
-            <p class="text-muted">27% flavor-match</p>
+            <p id="malt-match" class="text-muted">27% flavor-match</p>
             <p class="text-justify">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
           </div>
 
           <div class="col-md-4">
             <h4>Yeast</h4>
-            <p class="text-muted">89% flavor-match</p>
+            <p id="yeast-match" class="text-muted">89% flavor-match</p>
             <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
           </div>
         </div>
@@ -273,12 +278,12 @@
         <div class="row">
             <div class="col-md-6">
               <h4>IBU</h4>
-              <p class="text-muted">83% flavor-match</p>
+              <p id="ibu-match" class="text-muted">83% flavor-match</p>
               <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
             </div>
             <div class="col-md-6">
               <h4>ABV</h4>
-              <p class="text-muted">12% flavor-match</p>
+              <p id="abv-match" class="text-muted">12% flavor-match</p>
               <p class="text-justify">Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
             </div>
         </div>
@@ -444,7 +449,6 @@
         <p class="text-muted">The Sherpa thinks you have good taste.</p>
         <div class="row">
           <div id="wordcloud-row" class="col-lg-12">
-            <img id="spinner-img" src="./img/ajaxSpinner.gif" class="img-responsive center-block"/>
           </div>
         </div>
       </div><!--/ profile-wordcloud-jumbotron -->
@@ -482,6 +486,11 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
+    
+    <script src="js/d3.js"></script>
+	<script src="js/d3.layout.cloud.js"></script>
+	<script src="js/execute.js"></script>
+    <script src="packages/browser/interop.js"></script>
     
     <!-- Dart core JS -->
 	<script type="application/dart" src="beersherpa.dart"></script>

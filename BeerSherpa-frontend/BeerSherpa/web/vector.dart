@@ -32,14 +32,19 @@ double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 		normalized *= 1.2;
 	if(normalized > .95)
 		normalized = .95;
+	
+	if(normalized == double.NAN)
+		normalized = 0.0;
 	return normalized;
 }
 
-Map<String,double> getBeerVector(Map map)
+Map<String,double> getBeerVector(Map map, {String type})
 {
 	Map<String,double> vector = new Map();
+	if(type == null)
+		type = "abv ibu hops malt yeast style brewery";
 	
-	if(map["abv"] != null)
+	if(map["abv"] != null && type.contains("abv"))
 	{
 		double abv = double.parse(map["abv"]);
     	if(abv <= 4.5)
@@ -50,7 +55,7 @@ Map<String,double> getBeerVector(Map map)
     		vector["high-abv"] = 1.0;
 	}
 	
-	if(map["ibu"] != null)
+	if(map["ibu"] != null && type.contains("ibu"))
 	{
 		double ibu = double.parse(map["ibu"]);
     	if(ibu <= 20)
@@ -63,7 +68,7 @@ Map<String,double> getBeerVector(Map map)
     		vector["high-ibu"] = 1.0;
 	}
 	
-	if(map["breweries"] != null)
+	if(map["breweries"] != null && type.contains("brewery"))
 	{
 		List<Map<String,String>> breweries = map["breweries"];
     	breweries.forEach((Map<String,String> brewery)
@@ -72,7 +77,7 @@ Map<String,double> getBeerVector(Map map)
     	});
 	}
 	
-	if(map["style"] != null && map["style"]["name"] != null)
+	if(map["style"] != null && map["style"]["name"] != null  && type.contains("style"))
 	{
 		String style = map["style"]["name"];
 		if(style.toLowerCase().contains("india pale ale"))
@@ -101,7 +106,7 @@ Map<String,double> getBeerVector(Map map)
 	
 	if(map["ingredients"] != null)
 	{
-		if(map["ingredients"]["hops"] != null)
+		if(map["ingredients"]["hops"] != null && type.contains("hops"))
 		{
 			List<Map<String,String>> hops = map["ingredients"]["hops"];
 			hops.forEach((Map<String,String> hop)
@@ -109,7 +114,7 @@ Map<String,double> getBeerVector(Map map)
 				vector[hop["name"]] = 1.0;
 			});
 		}
-		if(map["ingredients"]["malt"] != null)
+		if(map["ingredients"]["malt"] != null && type.contains("malt"))
 		{
 			List<Map<String,String>> malts = map["ingredients"]["malt"];
 			malts.forEach((Map<String,String> malt)
@@ -117,7 +122,7 @@ Map<String,double> getBeerVector(Map map)
 				vector[malt["name"]] = 1.0;
 			});
 		}
-		if(map["ingredients"]["yeast"] != null)
+		if(map["ingredients"]["yeast"] != null && type.contains("yeast"))
 		{
 			List<Map<String,String>> yeasts = map["ingredients"]["yeast"];
 			yeasts.forEach((Map<String,String> yeast)
