@@ -875,6 +875,8 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     t1 = {};
     numHits = $.currentUser.numHits;
     t1.hit_0 = false;
+    if (typeof numHits !== "number")
+      return H.iae(numHits);
     t2 = 200 - numHits;
     confidence = 0.05 + t2 * 0.35 / 200 + 0.15 + 3 * (0.2 - t2 * 0.2 / 200) + 0.15 - t2 * 0.15 / 200 + 0.05 - t2 * 0.05 / 200;
     t2 = L.getBeerVector(singleResult, "brewery");
@@ -1069,9 +1071,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       t1 = J.get$classes$x(t1);
       t1.remove$1(t1, "disabled");
       try {
-        t1 = L.User$fromJSON(C.C_JsonCodec.decode$1(response));
-        $.currentUser = t1;
-        P.print(t1.getVector$0());
+        $.currentUser = L.User$fromJSON(C.C_JsonCodec.decode$1(response));
         $.get$localStorage().setItem("loggedIn", response);
         t1 = $.get$pageDivs();
         J.remove$1$ax(J.get$classes$x(t1.$index(t1, "advice-page")), "hidden");
@@ -1183,7 +1183,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       t1.remove$1(t1, "disabled");
       try {
         C.C_JsonCodec.decode$1(response);
-        t1 = new L.User(this.email_0, this.password_1, null, 0);
+        t1 = new L.User(this.email_0, this.password_1, null, 0, 0);
         t1.flavorProfile = L.FlavorProfile$();
         $.currentUser = t1;
         $.get$localStorage().setItem("loggedIn", response);
@@ -1780,7 +1780,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
   },
   "+ftu_closure": 0,
   User: {
-    "": "Object;email-,password-,flavorProfile-,numHits-",
+    "": "Object;email-,password-,flavorProfile-,numHits-,index-",
     getVector$0: function() {
       var map, t1;
       map = P.LinkedHashMap_LinkedHashMap(null, null, null, null, null);
@@ -1806,7 +1806,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       t1 = J.getInterceptor$asx(map);
       styleMap = t1.$index(map, "style");
       if (styleMap != null && J.$index$asx(styleMap, "name") != null) {
-        this.numHits = this.numHits + 1;
+        this.numHits = J.$add$ns(this.numHits, 1);
         style = J.$index$asx(t1.$index(map, "style"), "name");
         t2 = J.getInterceptor$s(style);
         if (J.contains$1$asx(t2.toLowerCase$0(style), "india pale ale") === true)
@@ -1854,7 +1854,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
         }
       }
       if (t1.$index(map, "abv") != null) {
-        this.numHits = this.numHits + 1;
+        this.numHits = J.$add$ns(this.numHits, 1);
         abv = H.Primitives_parseDouble(t1.$index(map, "abv"), null);
         t2 = J.getInterceptor$n(abv);
         if (t2.$le(abv, 4.5) === true) {
@@ -1926,7 +1926,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
         }
       }
       if (t1.$index(map, "ibu") != null) {
-        this.numHits = this.numHits + 1;
+        this.numHits = J.$add$ns(this.numHits, 1);
         ibu = H.Primitives_parseDouble(t1.$index(map, "ibu"), null);
         t2 = J.getInterceptor$n(ibu);
         if (t2.$le(ibu, 20) === true) {
@@ -2048,6 +2048,10 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       t1.jsonString_0 = jsonString;
       jsonString += "\"password\":\"" + H.S(this.password) + "\",";
       t1.jsonString_0 = jsonString;
+      jsonString += "\"numHits\":\"" + H.S(this.numHits) + "\",";
+      t1.jsonString_0 = jsonString;
+      jsonString += "\"index\":\"" + H.S(this.index) + "\",";
+      t1.jsonString_0 = jsonString;
       jsonString += "\"flavorProfile\":{";
       t1.jsonString_0 = jsonString;
       t1.jsonString_0 = jsonString + "\"hops\":[";
@@ -2120,6 +2124,8 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       var t1 = J.getInterceptor$asx(map);
       this.email = t1.$index(map, "email");
       this.password = t1.$index(map, "password");
+      this.numHits = H.Primitives_parseInt(J.toString$0(t1.$index(map, "numHits")), null, null);
+      this.index = H.Primitives_parseInt(J.toString$0(t1.$index(map, "index")), null, null);
       this.flavorProfile = L.FlavorProfile$();
       J.forEach$1$ax(H.subtypeCast(J.$index$asx(t1.$index(map, "flavorProfile"), "hops"), "$isList", [[P.Map, J.JSString, [P.Map, J.JSString, J.JSString]]], "$asList"), new L.User$fromJSON_closure(this));
       J.forEach$1$ax(H.subtypeCast(J.$index$asx(t1.$index(map, "flavorProfile"), "malt"), "$isList", [[P.Map, J.JSString, [P.Map, J.JSString, J.JSString]]], "$asList"), new L.User$fromJSON_closure0(this));
@@ -2130,7 +2136,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       J.forEach$1$ax(H.subtypeCast(J.$index$asx(t1.$index(map, "flavorProfile"), "brewery"), "$isList", [[P.Map, J.JSString, [P.Map, J.JSString, J.JSString]]], "$asList"), new L.User$fromJSON_closure5(this));
     },
     static: {User$fromJSON: function(map) {
-        var t1 = new L.User(null, null, null, 0);
+        var t1 = new L.User(null, null, null, 0, 0);
         t1.User$fromJSON$1(map);
         return t1;
       }, "+new User$fromJSON:1:0": 1}
@@ -2386,7 +2392,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     call$1: function(hop) {
       var t1, t2, t3, t4;
       t1 = this.this_0;
-      t1.numHits = t1.numHits + 1;
+      t1.numHits = J.$add$ns(t1.numHits, 1);
       t2 = t1.flavorProfile.hops;
       t3 = J.getInterceptor$asx(hop);
       if (t2.$index(t2, t3.$index(hop, "name")) != null) {
@@ -2420,7 +2426,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     call$1: function(malt) {
       var t1, t2, t3, t4;
       t1 = this.this_2;
-      t1.numHits = t1.numHits + 1;
+      t1.numHits = J.$add$ns(t1.numHits, 1);
       t2 = t1.flavorProfile.malt;
       t3 = J.getInterceptor$asx(malt);
       if (t2.$index(t2, t3.$index(malt, "name")) != null) {
@@ -2454,7 +2460,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     call$1: function(yeast) {
       var t1, t2, t3, t4;
       t1 = this.this_4;
-      t1.numHits = t1.numHits + 1;
+      t1.numHits = J.$add$ns(t1.numHits, 1);
       t2 = t1.flavorProfile.yeast;
       t3 = J.getInterceptor$asx(yeast);
       if (t2.$index(t2, t3.$index(yeast, "name")) != null) {
@@ -2488,7 +2494,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     call$1: function(brewery) {
       var t1, t2, t3, t4;
       t1 = this.this_6;
-      t1.numHits = t1.numHits + 1;
+      t1.numHits = J.$add$ns(t1.numHits, 1);
       t2 = t1.flavorProfile.brewery;
       t3 = J.getInterceptor$asx(brewery);
       if (t2.$index(t2, t3.$index(brewery, "name")) != null) {
@@ -4717,6 +4723,29 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     throw H.wrapException(P.FormatException$(string));
   },
   "+_throwFormatException:1:0": 1,
+  Primitives_parseInt: function(source, radix, handleError) {
+    var match, t1;
+    handleError = H.Primitives__throwFormatException$closure;
+    if (typeof source !== "string")
+      H.throwExpression(new P.ArgumentError(source));
+    match = /^\s*[+-]?((0x[a-f0-9]+)|(\d+)|([a-z0-9]+))\s*$/i.exec(source);
+    if (match != null) {
+      t1 = match.length;
+      if (2 >= t1)
+        return H.ioore(match, 2);
+      if (match[2] != null)
+        return parseInt(source, 16);
+      if (3 >= t1)
+        return H.ioore(match, 3);
+      if (match[3] != null)
+        return parseInt(source, 10);
+      return handleError.call$1(source);
+    }
+    if (match == null)
+      return handleError.call$1(source);
+    return parseInt(source, 10);
+  },
+  "+parseInt:3:0": 1,
   Primitives_parseDouble: function(source, handleError) {
     var result, trimmed, t1;
     if (typeof source !== "string")
