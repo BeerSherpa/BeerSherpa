@@ -7,6 +7,8 @@ void initSearch(){
   querySelector("#advice-button-submit")..onClick.listen((MouseEvent e) => advice());
   //Same for tasts textfield
   querySelector("#tastes-button-submit")..onClick.listen((MouseEvent e) => tastes());
+  //ftu
+  querySelector("#ftu-button-submit")..onClick.listen((MouseEvent e) => ftu());
 }
 
 void Search(String query){
@@ -204,13 +206,13 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     card.querySelector(".beer-yum")..onClick.listen((MouseEvent e)
     {
     	currentUser.like(singleResult, true);
-    	fadeCard(querySelector("#advice-beer-card"));
+    	fadeCard(card);
     });
     card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e)
-	{
-		currentUser.like(singleResult, false);
-		fadeCard(querySelector("#advice-beer-card"));
-	});
+  	{
+  		currentUser.like(singleResult, false);
+  		fadeCard(card);
+  	});
     
     card.classes.remove("hidden");
 }
@@ -245,10 +247,16 @@ void selectedResult(Map singleResult){
     
     //format the styling
     
-  } else { //the advice page is hidden, we will assume we are seeking likes
+  } else if (!querySelector("#tastes-page").classes.contains("hidden")) { //the advice page is hidden, we will check the tastes
     
     querySelector("#tastes-beer-card").classes.remove("hidden");
     DivElement card = querySelector("#tastes-beer-card");   
+    createBeerInfoCard(card, singleResult);
+    
+  } else if (!querySelector("#ftu-page").classes.contains("hidden")) {
+    
+    querySelector("#ftu-beer-card").classes.remove("hidden");
+    DivElement card = querySelector("#ftu-beer-card");   
     createBeerInfoCard(card, singleResult);
     
   }
@@ -273,6 +281,15 @@ void tastes(){
   querySelectorAll(".beer-desc").forEach((Element e) => e.text="");
   querySelectorAll(".beer-label").forEach((Element e) => e.text=""); 
   Search((querySelector("#tastes-input-beer") as InputElement).value);
+}
+
+void ftu(){
+  querySelector("#scroll-results").children.clear();
+  querySelector("#ftu-beer-card").classes.add("hidden");
+  querySelectorAll(".beer-img").forEach((Element e) => e.text=""); 
+  querySelectorAll(".beer-desc").forEach((Element e) => e.text="");
+  querySelectorAll(".beer-label").forEach((Element e) => e.text=""); 
+  Search((querySelector("#ftu-input-beer") as InputElement).value);
 }
 
 
