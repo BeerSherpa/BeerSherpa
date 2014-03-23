@@ -379,7 +379,7 @@ class User
 		HttpRequest.request(url, method: "GET").then((HttpRequest request)
 		{
 			print("updated user: " + request.responseText);
-		}).catchError((error) => print("error: " + error));
+		}).catchError((error) => print(error));
 	}
 	
 	String toJSON()
