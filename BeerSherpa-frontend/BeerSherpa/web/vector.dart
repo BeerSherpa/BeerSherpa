@@ -22,7 +22,14 @@ double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 	double denominator = sqrt(beerSum) * sqrt(userSum);
 	double raw = dotSum/denominator;
 	
-	return (raw+1)/2;
+	double normalized = (raw+1)/2;
+	if(normalized < .6)
+		normalized *= .6;
+	else
+		normalized *= 1.2;
+	if(normalized > .95)
+		normalized = .95;
+	return normalized;
 }
 
 Map<String,double> getBeerVector(Map map)
