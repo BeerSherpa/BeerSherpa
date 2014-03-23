@@ -291,6 +291,9 @@ class User
 							flavorProfile.hops[hop["name"]] = new Liked(1.0,0.0);
 					}
 				});
+			}
+			if(map["ingredients"]["malt"] != null)
+           	{
 				List<Map<String,String>> malts = map["ingredients"]["malt"];
 				malts.forEach((Map<String,String> malt)
 				{
@@ -308,6 +311,9 @@ class User
 							flavorProfile.malt[malt["name"]] = new Liked(1.0,0.0);
 					}
 				});
+			}
+			if(map["ingredients"]["yeast"] != null)
+            {
 				List<Map<String,String>> yeasts = map["ingredients"]["yeast"];
 				yeasts.forEach((Map<String,String> yeast)
 				{
