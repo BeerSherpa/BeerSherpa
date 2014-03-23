@@ -244,6 +244,7 @@ void selectedResult(Map singleResult){
     createBeerInfoCard(card, singleResult);
     
     double similarity = getDistance(getBeerVector(singleResult),currentUser.getVector());
+    querySelector("#distance").text = similarity.toString();
     
     //format the styling
     
