@@ -236,6 +236,7 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     currentResult = singleResult;
     
     card.classes.remove("hidden");
+    window.scroll(0, card.offsetTop);
 }
 
 void fadeCard(Element card)
