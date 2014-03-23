@@ -243,8 +243,11 @@ void selectedResult(Map singleResult){
     DivElement card = querySelector("#advice-beer-card");   
     createBeerInfoCard(card, singleResult);
     
-    double similarity = getDistance(getBeerVector(singleResult),currentUser.getVector());
-    querySelector("#distance").text = similarity.toString();
+    if(currentUser != null)
+    {
+    	double similarity = getDistance(getBeerVector(singleResult),currentUser.getVector());
+        querySelector("#distance").text = similarity.toString();
+    }
     
     //format the styling
     
