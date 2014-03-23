@@ -15,15 +15,17 @@ void initProfile()
 void refreshWordCloud(String type)
 {
 	String text = currentUser.flavorProfile.stringValue(type);
-	querySelector("#profile-wordcloud-jumbotron").classes.remove("hidden");
+	querySelector("#wc-row").classes.remove("hidden");
 	if(querySelector("#wordcloud-img") != null)
     	querySelector("#wordcloud-img").remove();
-	
-	window.scrollTo(0, querySelector("#profile-wordcloud-jumbotron").offsetTop);
 	
 	List wordList = text.split(" ");
 	wordList.removeAt(0);
 	js.context.execute(new JsObject.jsify(wordList));
+
+	
+	 
+
 	
 	/*getWordCloudUrl(text).then((String url)
 	{

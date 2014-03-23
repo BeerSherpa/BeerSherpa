@@ -237,7 +237,6 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     currentResult = singleResult;
     
     card.classes.remove("hidden");
-    window.scroll(0, querySelector("#results-jumbotron").offsetTop-70);
 }
 
 void fadeCard(Element card)
