@@ -3,6 +3,17 @@ body {
   padding-bottom: 100px;
 }
 
+#li-logout{
+	color: #A94442;
+	margin-left: 50px;
+}
+
+#li-logout:hover{
+	color: #EBCCD1;
+}
+
+
+
 #scroll-results{
   max-height: 300px;
   overflow-y: scroll;
@@ -54,15 +65,28 @@ ul.nav li.active{
 }
 
 .red-jumbotron{
-	background-color: #F7DBDA;
+	background-color: #F2DEDE;
 }
 
 .yellow-jumbotron{
-	background-color: #FFFFE0;
+	background-color: #FCF8E3;
 }
 
 .beer-label{
 	font-weight: normal;
+}
+
+.color-love{
+	color: #DFF0D8;
+}
+.color-like{
+	color: #D9EDF7;
+}
+.color-tolerate{
+	color: #FCF8E3;
+}
+.color-hate{
+	color: #F2DEDE;
 }
 
 .fade {
