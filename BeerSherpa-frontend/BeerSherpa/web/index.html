@@ -143,7 +143,30 @@
       <br />
 
       <div id="advice-beer-card" class="hidden">
-      </div><!--/ beer-info-jumbotron -->
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title beer-title">Title</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3 beer-img">
+
+              </div>
+              <div class="col-md-6">
+                <h3>Description <span class="label hidden label-default beer-label beer-abv">8.9 ABV</span> <span class="label label-default beer-label hidden beer-ibu">68 IBU</span></h3>
+                <div class="beer-desc">
+                </div>
+                <br />
+              </div>
+              <div class="col-sm-3" id="beer-info-ratecol">
+                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <br />
+                <button class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
+              </div>
+            </div>
+          </div>
+        </div><!--/ panel-->
+      </div><!--/ beer-info -->
 
       <br />
 
@@ -156,7 +179,7 @@
           <h2>Here's why:</h2>
         </div>
 
-        <div class="row">
+        <!--<div class="row">
           <div class="col-md-4">
             <ul class="list-group">
               <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favorite Brewery!</li>
@@ -167,7 +190,7 @@
               <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favorite Style!</li>
             </ul>
           </div>
-        </div>
+        </div>-->
 
         <div class="row">
           <div class="col-md-4">
@@ -226,23 +249,26 @@
 
       <br />
 
-      <div id="tastes-beer-card" class="f">
+      <div id="tastes-beer-card" class="hidden">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h3 class="panel-title beer-info-title">Title</h3>
+            <h3 class="panel-title beer-title">Title</h3>
           </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-4 beer-info-imgcol">
+              <div class="col-md-3 beer-img">
 
               </div>
-              <div class="col-md-4 beer-info-desccol">
+              <div class="col-md-6">
+                <h3>Description <span class="label hidden label-default beer-label beer-abv">8.9 ABV</span> <span class="label label-default beer-label hidden beer-ibu">68 IBU</span></h3>
 
+                <div class="beer-desc">
+                </div>
               </div>
-              <div class="col-md-4 beer-info-ratecol">
-                <button id="rate-button-thumbs-up" class="btn btn-lg btn-block btn-success" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+              <div class="col-md-3" id="beer-info-ratecol">
+                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
                 <br />
-                <button id="rate-button-thumbs-down" class="btn btn-lg btn-block btn-danger" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
+                <button class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
               </div>
             </div>
           </div>

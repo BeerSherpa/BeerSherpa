@@ -8,6 +8,7 @@ part 'account.dart';
 part 'vector.dart';
 part 'profile.dart';
 part 'user.dart';
+part 'randombeer.dart';
 
 Map<String,Element> pageDivs = new Map();
 Storage localStorage = window.localStorage;
