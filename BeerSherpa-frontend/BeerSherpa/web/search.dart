@@ -219,8 +219,6 @@ void createBeerInfoCard(DivElement card, Map singleResult){
       card.querySelector(".beer-img").text = "[ no picture ]";
     }
     
-    
-    print(singleResult.toString());
     //Set ibu and abv
     if(singleResult["abv"] != null){
       card.querySelector(".beer-abv").classes.remove("hidden");
@@ -237,6 +235,7 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     currentResult = singleResult;
     
     card.classes.remove("hidden");
+	window.scroll(0, querySelector("#results-jumbotron").offsetTop-70);
 }
 
 void fadeCard(Element card)
@@ -292,6 +291,11 @@ void selectedResult(Map singleResult){
     if(currentUser != null)
     {
     	Map<String,double> userVector = currentUser.getVector();
+    	querySelector("#hops-list-group").children.clear();
+    	querySelector("#malt-list-group").children.clear();
+    	querySelector("#yeast-list-group").children.clear();
+    	querySelector("#abv-list-group").children.clear();
+    	querySelector("#ibu-list-group").children.clear();
     	
     	double similarity = getDistance(getBeerVector(singleResult),userVector);
         querySelector("#distance").text = formatter.format(similarity);
@@ -378,6 +382,8 @@ void selectedResult(Map singleResult){
 			else
 				querySelector("#fav-style").classes.add("hidden");
 		});
+		
+		print(confidence(singleResult,userVector));
     }
     
     //format the styling
@@ -397,6 +403,73 @@ void selectedResult(Map singleResult){
   }
   
   
+}
+
+double confidence(Map singleResult, Map<String,double> userVector)
+{
+	double confidence = 0.0;
+	double hitceil = 200.0;
+	int numHits = currentUser.numHits;
+	bool hit = false;
+	
+	confidence = .05+((hitceil-numHits)*(.5-.15)/hitceil) + .15 + 3*(.2-((hitceil-numHits)*(.2-0)/hitceil)) + .15 - ((hitceil - numHits)*(.15-0)/hitceil) + .05- ((hitceil-numHits)*(.05-0)/hitceil);
+	getBeerVector(singleResult,type:"brewery").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+			hit = true;
+	});
+	if(!hit)
+		confidence -= .01;
+	hit = false;
+	getBeerVector(singleResult,type:"style").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+        	hit = true;
+	});
+	if(!hit)
+    	confidence -= .09;
+    hit = false;
+	getBeerVector(singleResult,type:"hops").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+                	hit = true;
+	});
+	if(!hit)
+    	confidence -= .05;
+    hit = false;
+	getBeerVector(singleResult,type:"malt").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+        	hit = true;
+	});
+	if(!hit)
+    	confidence -= .05;
+    hit = false;
+	getBeerVector(singleResult,type:"yeast").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+        	hit = true;
+	});
+	if(!hit)
+    	confidence -= .05;
+    hit = false;
+	getBeerVector(singleResult,type:"ibu").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+        	hit = true;
+	});
+	if(!hit)
+    	confidence -= .05;
+    hit = false;
+	getBeerVector(singleResult,type:"abv").forEach((String name, double value)
+	{
+		if(userVector[name] != null)
+        	hit = true;
+	});
+	if(!hit)
+    	confidence -= .01;
+	
+	return confidence;
 }
 
 void buildList(String type, String name, Map userVector)

@@ -25,6 +25,7 @@ double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 	double normalized = (raw+1)/2;
 	
 	print("raw: " + normalized.toString());
+	return normalized;
 	
 	if(normalized < .55)
 		normalized *= .6;
