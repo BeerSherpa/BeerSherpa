@@ -10,7 +10,7 @@ void initSearch(){
 }
 
 void Search(String query){
-  //Create url 
+  //Create url
   String url = "http://beersherpaapp.appspot.com/api?endpoint=search&q=$query&withBreweries=Y&withIngredients=Y";
   //Send request
   var request = HttpRequest.getString(url).then(showResults);
@@ -201,8 +201,14 @@ void createBeerInfoCard(DivElement card, Map singleResult){
     
     
     //Set button listens
-    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e) => currentUser.like(singleResult, true));
-    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e) => currentUser.like(singleResult, false));
+    card.querySelector(".beer-yum")..onClick.listen((MouseEvent e) {
+      currentUser.like(singleResult, true);
+      
+    });
+    card.querySelector(".beer-yuk")..onClick.listen((MouseEvent e) {
+      currentUser.like(singleResult, false);
+      
+    });
     
     card.classes.remove("hidden");
 }

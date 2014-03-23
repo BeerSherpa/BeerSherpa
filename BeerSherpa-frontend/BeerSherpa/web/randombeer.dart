@@ -18,7 +18,6 @@ void populateRandom(){
   String url = "http://beersherpaapp.appspot.com/api?endpoint=beer/$id&withBreweries=Y";
   //Send request
   var request = HttpRequest.getString(url).then(buildResult);
-  
 }
 
 void buildResult(String responseText) {
@@ -29,6 +28,8 @@ void buildResult(String responseText) {
   Map parsedMap = JSON.decode(jsonString);
   
   Map dataMap = parsedMap["data"];
+  
+  print(dataMap);
     
   DivElement jumbotron = querySelector("#rate-jumbotron");
   
@@ -47,6 +48,16 @@ void buildResult(String responseText) {
   if (imgs != null){
     jumbotron.querySelector("#rate-img").setAttribute("src", imgs["medium"]);
   }
+  
+  //Listeners for yak / yum 
+  querySelector("#rate-button-yum")..onClick.listen((MouseEvent e) {
+    currentUser.like(dataMap, true);
+    populateRandom();
+  });
+  querySelector("#rate-button-yuk")..onClick.listen((MouseEvent e) {
+    currentUser.like(dataMap, false);
+    populateRandom();
+  }); 
    
 }
 
