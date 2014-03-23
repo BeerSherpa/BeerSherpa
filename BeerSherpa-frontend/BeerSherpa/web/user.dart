@@ -479,7 +479,7 @@ class FlavorProfile
 					profile += " $key";
 			});
         }
-		if(range == "all" || range == "ibu")
+		if(range == "all" || range == "abvibu")
         {
 			ibu.forEach((String key, Liked value)
 			{
@@ -487,7 +487,7 @@ class FlavorProfile
 					profile += " $key";
 			});
         }
-		if(range == "all" || range == "abv")
+		if(range == "all" || range == "abvabv")
 		{
 			abv.forEach((String key, Liked value)
 			{

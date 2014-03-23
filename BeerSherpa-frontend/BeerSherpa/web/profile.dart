@@ -1,9 +1,26 @@
 part of BeerSherpa;
 
+void initProfile()
+{
+	querySelectorAll(".wordcloud-button").forEach((Element element)
+	{
+		element.onClick.listen((MouseEvent event)
+		{
+			Element target = event.target;
+			refreshWordCloud(target.id.substring(0, target.id.indexOf("-")));
+		});
+	});
+}
+
 void refreshWordCloud(String type)
 {
 	String text = currentUser.flavorProfile.stringValue(type);
 	querySelector("#spinner-img").classes.remove("hidden");
+	querySelector("#profile-wordcloud-jumbotron").classes.remove("hidden");
+	if(querySelector("#wordcloud-img") != null)
+    	querySelector("#wordcloud-img").remove();
+	
+	window.scrollTo(0, querySelector("#profile-wordcloud-jumbotron").offsetTop);
 	
 	getWordCloudUrl(text).then((String url)
 	{
@@ -14,7 +31,6 @@ void refreshWordCloud(String type)
       	img.onLoad.listen((_)
   		{
       		querySelector("#spinner-img").classes.add("hidden");
-      		querySelector("#wordcloud-img").remove();
       		querySelector("#wordcloud-row").append(img);
   		});
 	});

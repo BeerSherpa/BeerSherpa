@@ -27,7 +27,7 @@ void main()
 	
 	initSearch();
 	initRandom();
-	
+	initProfile();
 }
 
 void initListeners()
