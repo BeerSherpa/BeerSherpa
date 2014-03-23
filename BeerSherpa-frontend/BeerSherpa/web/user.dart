@@ -6,12 +6,6 @@ class User
 	FlavorProfile flavorProfile;
 	int numHits = 0, index = 0;
 	
-	int getIndex() => index;
-	void setIndex(int index)
-	{
-		this.index = index;
-	}
-	
 	User(this.email,this.password)
 	{
 		flavorProfile = new FlavorProfile();
@@ -21,8 +15,8 @@ class User
 	{
 		email = map["email"];
 		password = map["password"];
-		numHits = int.parse(map["numHits"]);
-		index = int.parse(map["index"]);
+		numHits = map["numHits"];
+		index = map["index"];
 		
 		flavorProfile = new FlavorProfile();
 		(map["flavorProfile"]["hops"] as List<Map<String,Map<String,String>>>).forEach((Map map)
@@ -396,6 +390,8 @@ class User
 		String jsonString = '{';
 		jsonString += '"email":"$email",';
 		jsonString += '"password":"$password",';
+		jsonString += '"numHits":"$numHits",';
+		jsonString += '"index":"$index",';				
 		jsonString += '"flavorProfile":{';
 		
 		jsonString += '"hops":[';
