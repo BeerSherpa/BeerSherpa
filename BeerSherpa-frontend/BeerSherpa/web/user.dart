@@ -15,8 +15,8 @@ class User
 	{
 		email = map["email"];
 		password = map["password"];
-		numHits = map["numHits"];
-		index = map["index"];
+		numHits = int.parse(map["numHits"].toString());
+		index = int.parse(map["index"].toString());
 		
 		flavorProfile = new FlavorProfile();
 		(map["flavorProfile"]["hops"] as List<Map<String,Map<String,String>>>).forEach((Map map)
