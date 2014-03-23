@@ -4,6 +4,7 @@ class User
 {
 	String email, password;
 	FlavorProfile flavorProfile;
+	int numHits = 0;
 	
 	User(this.email,this.password)
 	{
