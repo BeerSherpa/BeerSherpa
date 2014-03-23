@@ -38,6 +38,7 @@ void loginUser(String email, String password)
 		try
 		{
 			currentUser = new User.fromJSON(JSON.decode(response));
+			print(currentUser.getVector());
 					
 			localStorage["loggedIn"] = response;
         	pageDivs["advice-page"].classes.remove("hidden");
@@ -114,6 +115,7 @@ void checkKey(Function successFunction, bool checkKeyCode, KeyboardEvent key, In
 {
 	if(checkKeyCode && key.keyCode != 13) //listen for enter key
 	{
+		removeError(emailInput);
 		removeError(passwordInput);
 		return;
 	}

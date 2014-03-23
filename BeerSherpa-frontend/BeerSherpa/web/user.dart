@@ -12,6 +12,7 @@ class User
 	
 	User.fromJSON(Map map)
 	{
+		print(map);
 		email = map["email"];
 		password = map["password"];
 		flavorProfile = new FlavorProfile();
@@ -73,6 +74,42 @@ class User
 		});
 	}
 	
+	Map<String,double> getVector()
+	{
+		Map<String,double> map = new Map();
+		flavorProfile.hops.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		flavorProfile.malt.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		flavorProfile.yeast.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		flavorProfile.abv.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		flavorProfile.ibu.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		flavorProfile.brewery.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		flavorProfile.style.forEach((String key, Liked value)
+		{
+			map[key] = value.liked/value.total;
+		});
+		
+		print(map);
+		return map;
+	}
+	
 	void like(Map map, bool like)
 	{
 		if(map["style"]["name"] != null)
@@ -108,14 +145,14 @@ class User
 			else
 			{
 				if(like)
-					flavorProfile.style[style] = new Liked(1,1);
+					flavorProfile.style[style] = new Liked(1.0,1.0);
 				else
-					flavorProfile.style[style] = new Liked(1,0);
+					flavorProfile.style[style] = new Liked(1.0,0.0);
 			}
 		}
 		if(map["abv"] != null)
 		{
-			int abv = int.parse(map["abv"]);
+			double abv = double.parse(map["abv"]);
 			if(abv <= 4.5)
 			{
 				if(flavorProfile.abv["low-abv"] != null)
@@ -127,9 +164,9 @@ class User
 				else
 				{
 					if(like)
-						flavorProfile.abv["low-abv"] = new Liked(1,1);
+						flavorProfile.abv["low-abv"] = new Liked(1.0,1.0);
 					else
-						flavorProfile.abv["low-abv"] = new Liked(1,0);
+						flavorProfile.abv["low-abv"] = new Liked(1.0,0.0);
 				}
 			}
 			else if(abv > 4.5 && abv <= 7)
@@ -143,9 +180,9 @@ class User
 					else
 					{
 						if(like)
-							flavorProfile.abv["mid-abv"] = new Liked(1,1);
+							flavorProfile.abv["mid-abv"] = new Liked(1.0,1.0);
 						else
-							flavorProfile.abv["mid-abv"] = new Liked(1,0);
+							flavorProfile.abv["mid-abv"] = new Liked(1.0,0.0);
 					}
 			}
 			else
@@ -159,15 +196,15 @@ class User
 				else
 				{
 					if(like)
-						flavorProfile.abv["high-abv"] = new Liked(1,1);
+						flavorProfile.abv["high-abv"] = new Liked(1.0,1.0);
 					else
-						flavorProfile.abv["high-abv"] = new Liked(1,0);
+						flavorProfile.abv["high-abv"] = new Liked(1.0,0.0);
 				}
 			}
 		}
 		if(map["ibu"] != null)
 		{
-			int ibu = int.parse(map["ibu"]);
+			double ibu = double.parse(map["ibu"]);
 			if(ibu <= 20)
 			{
 				if(flavorProfile.ibu["xlow-ibu"] != null)
@@ -179,9 +216,9 @@ class User
                 else
                 {
                 	if(like)
-                		flavorProfile.ibu["xlow-ibu"] = new Liked(1,1);
+                		flavorProfile.ibu["xlow-ibu"] = new Liked(1.0,1.0);
                 	else
-                		flavorProfile.ibu["xlow-ibu"] = new Liked(1,0);
+                		flavorProfile.ibu["xlow-ibu"] = new Liked(1.0,0.0);
                 }
 			}
 			else if(ibu > 20 && ibu <= 40)
@@ -195,9 +232,9 @@ class User
                 else
                 {
                 	if(like)
-                		flavorProfile.ibu["low-ibu"] = new Liked(1,1);
+                		flavorProfile.ibu["low-ibu"] = new Liked(1.0,1.0);
                 	else
-                		flavorProfile.ibu["low-ibu"] = new Liked(1,0);
+                		flavorProfile.ibu["low-ibu"] = new Liked(1.0,0.0);
                 }
 			}
 			else if(ibu > 40 && ibu <= 60)
@@ -211,9 +248,9 @@ class User
                 else
                 {
                 	if(like)
-                		flavorProfile.ibu["mid-ibu"] = new Liked(1,1);
+                		flavorProfile.ibu["mid-ibu"] = new Liked(1.0,1.0);
                 	else
-                		flavorProfile.ibu["mid-ibu"] = new Liked(1,0);
+                		flavorProfile.ibu["mid-ibu"] = new Liked(1.0,0.0);
                 }
 			}
 			else
@@ -227,9 +264,9 @@ class User
                 else
                 {
                 	if(like)
-                		flavorProfile.ibu["high-ibu"] = new Liked(1,1);
+                		flavorProfile.ibu["high-ibu"] = new Liked(1.0,1.0);
                 	else
-                		flavorProfile.ibu["high-ibu"] = new Liked(1,0);
+                		flavorProfile.ibu["high-ibu"] = new Liked(1.0,0.0);
                 }
 			}
 		}
@@ -240,7 +277,7 @@ class User
 				List<Map<String,String>> hops = map["ingredients"]["hops"];
 				hops.forEach((Map<String,String> hop)
 				{
-					if(flavorProfile.hops["name"] != null)
+					if(flavorProfile.hops[hop["name"]] != null)
 					{
 						flavorProfile.hops[hop["name"]].total++;
 						if(like)
@@ -249,15 +286,15 @@ class User
 					else
 					{
 						if(like)
-							flavorProfile.hops[hop["name"]] = new Liked(1,1);
+							flavorProfile.hops[hop["name"]] = new Liked(1.0,1.0);
 						else
-							flavorProfile.hops[hop["name"]] = new Liked(1,0);
+							flavorProfile.hops[hop["name"]] = new Liked(1.0,0.0);
 					}
 				});
 				List<Map<String,String>> malts = map["ingredients"]["malt"];
 				malts.forEach((Map<String,String> malt)
 				{
-					if(flavorProfile.malt["name"] != null)
+					if(flavorProfile.malt[malt["name"]] != null)
 					{
 						flavorProfile.malt[malt["name"]].total++;
 						if(like)
@@ -266,15 +303,15 @@ class User
 					else
 					{
 						if(like)
-							flavorProfile.malt[malt["name"]] = new Liked(1,1);
+							flavorProfile.malt[malt["name"]] = new Liked(1.0,1.0);
 						else
-							flavorProfile.malt[malt["name"]] = new Liked(1,0);
+							flavorProfile.malt[malt["name"]] = new Liked(1.0,0.0);
 					}
 				});
 				List<Map<String,String>> yeasts = map["ingredients"]["yeast"];
 				yeasts.forEach((Map<String,String> yeast)
 				{
-					if(flavorProfile.yeast["name"] != null)
+					if(flavorProfile.yeast[yeast["name"]] != null)
 					{
 						flavorProfile.yeast[yeast["name"]].total++;
 						if(like)
@@ -283,9 +320,9 @@ class User
 					else
 					{
 						if(like)
-							flavorProfile.yeast[yeast["name"]] = new Liked(1,1);
+							flavorProfile.yeast[yeast["name"]] = new Liked(1.0,1.0);
 						else
-							flavorProfile.yeast[yeast["name"]] = new Liked(1,0);
+							flavorProfile.yeast[yeast["name"]] = new Liked(1.0,0.0);
 					}
 				});
 			}
@@ -295,7 +332,7 @@ class User
 			List<Map<String,String>> breweries = map["breweries"];
 			breweries.forEach((Map<String,String> brewery)
 			{
-				if(flavorProfile.brewery["name"] != null)
+				if(flavorProfile.brewery[brewery["name"]] != null)
 				{
 					flavorProfile.brewery[brewery["name"]].total++;
 					if(like)
@@ -304,9 +341,9 @@ class User
 				else
 				{
 					if(like)
-						flavorProfile.brewery[brewery["name"]] = new Liked(1,1);
+						flavorProfile.brewery[brewery["name"]] = new Liked(1.0,1.0);
 					else
-						flavorProfile.brewery[brewery["name"]] = new Liked(1,0);
+						flavorProfile.brewery[brewery["name"]] = new Liked(1.0,0.0);
 				}
 			});
 		}
@@ -455,14 +492,14 @@ class FlavorProfile
 
 class Liked
 {
-	int total, liked;
+	double total, liked;
 	
 	Liked(var total,var liked)
 	{
 		try
 		{
-			this.total = int.parse(total);
-			this.liked = int.parse(liked);
+			this.total = double.parse(total);
+			this.liked = double.parse(liked);
 		}
 		catch(error)
 		{
