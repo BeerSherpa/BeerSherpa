@@ -30,8 +30,10 @@ void main()
 	initListeners();
 	
 	initSearch();
+	 initProfile();
+	 
 	initRandom();
-	initProfile();
+
 }
 
 void initListeners()

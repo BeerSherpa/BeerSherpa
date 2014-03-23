@@ -11,29 +11,36 @@ void initRandom(){
   //Listeners for yak / yum 
   querySelector("#rate-button-yum")..onClick.listen((MouseEvent e) {
     currentUser.like(currentData, true);
-    populateRandom();
+    populateTrack();
   });
   querySelector("#rate-button-yuk")..onClick.listen((MouseEvent e) {
     currentUser.like(currentData, false);
-    populateRandom();
+    populateTrack();
   }); 
-  currentNumber=0;
   
-  populateRandom();
+  currentNumber = currentUser.getIndex();
+  
+  populateTrack();
   
 }
 
 //get a random one
+void populateTrack(){
+  if(currentNumber < beerids.length){
+    int trackIndex = currentNumber++;
+    currentUser.setIndex(currentNumber);
+    String id = beerids[trackIndex];
+     //Create url 
+    String url = "http://beersherpaapp.appspot.com/api?endpoint=beer/$id&withBreweries=Y";
+    //Send request
+    var request = HttpRequest.getString(url).then(buildResult);
+  } else {
+    populateRandom();
+  }
+}
+
 void populateRandom(){
   
-  int random = currentNumber++;
-  
-  String id = beerids[random];
-  
-  //Create url 
-  String url = "http://beersherpaapp.appspot.com/api?endpoint=beer/$id&withBreweries=Y";
-  //Send request
-  var request = HttpRequest.getString(url).then(buildResult);
 }
 
 void buildResult(String responseText) {
