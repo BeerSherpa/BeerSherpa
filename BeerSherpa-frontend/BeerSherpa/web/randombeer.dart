@@ -1,7 +1,7 @@
 part of BeerSherpa;
 
 //init a list of beer id's 
-List beerids = ["L7OSOj", "8vBYrZ", "qeXBVh", "hj7N75", "ULQE3L", "w1ndc4", "z4k3eU", "vbJQ8t", "Lf1c6i", "iqX54w", "baONtD", "9GtCUG", "yy3cTm", "m3xewW", "cJio9R", "WHQisc", "odItSS", "Uiol9p", "UD5Sm4", "CrEWhc", "Gkd1YS", "eqtMQs", "X4JKZd", "9kidXn", "UpiAAy", "25lKg4", "I4vp71", "187kFc", "rtMecd", "tPayGU", "zYJxUM", "KY5gtZ", "pBfN8o", "CJpcWg", "lHlnqe", "EiCuSk", "RVOBIF", "Q9PlwV"];
+List beerids = ["8vBYrZ", "qeXBVh", "hj7N75", "ULQE3L", "w1ndc4", "z4k3eU", "vbJQ8t", "Lf1c6i", "iqX54w", "baONtD", "9GtCUG", "yy3cTm", "m3xewW", "cJio9R", "WHQisc", "odItSS", "Uiol9p", "UD5Sm4", "CrEWhc", "Gkd1YS", "eqtMQs", "X4JKZd", "9kidXn", "UpiAAy", "25lKg4", "I4vp71", "187kFc", "rtMecd", "tPayGU", "zYJxUM", "KY5gtZ", "pBfN8o", "CJpcWg", "lHlnqe", "EiCuSk", "RVOBIF", "L7OSOj", "Q9PlwV"];
 
 Map currentData;
 int currentNumber;
@@ -18,6 +18,9 @@ void initRandom(){
     populateRandom();
   }); 
   currentNumber=0;
+  
+  populateRandom();
+  
 }
 
 //get a random one

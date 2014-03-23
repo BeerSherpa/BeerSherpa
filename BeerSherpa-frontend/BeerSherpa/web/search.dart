@@ -401,12 +401,14 @@ void selectedResult(Map singleResult){
 
 void buildList(String type, String name, Map userVector)
 {
-	AnchorElement element = new AnchorElement();
+	UListElement element = new UListElement();
+	
 	if(userVector[name] != null)
 		element.className = "list-group-item list-group-item-success";
 	else
 		element.className = "list-group-item";
 	element.text = name;
+	
 	querySelector("#$type-list-group").append(element);
 }
 

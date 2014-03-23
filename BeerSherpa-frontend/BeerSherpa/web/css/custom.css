@@ -57,6 +57,10 @@ ul.nav li.active{
 	background-color: #F7DBDA;
 }
 
+.yellow-jumbotron{
+	background-color: #FFFFE0;
+}
+
 .beer-label{
 	font-weight: normal;
 }
