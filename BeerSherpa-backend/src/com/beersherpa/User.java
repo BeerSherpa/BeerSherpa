@@ -8,5 +8,5 @@ public class User implements Serializable
 	
 	FlavorProfile flavorProfile;
 	String email, password;
-	int numHits = 0;
+	int numHits = 0, index = 0;
 }

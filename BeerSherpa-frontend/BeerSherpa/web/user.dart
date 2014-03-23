@@ -4,7 +4,13 @@ class User
 {
 	String email, password;
 	FlavorProfile flavorProfile;
-	int numHits = 0;
+	int numHits = 0, index = 0;
+	
+	int getIndex() => index;
+	void setIndex(int index)
+	{
+		this.index = index;
+	}
 	
 	User(this.email,this.password)
 	{
@@ -15,6 +21,9 @@ class User
 	{
 		email = map["email"];
 		password = map["password"];
+		numHits = int.parse(map["numHits"]);
+		index = int.parse(map["index"]);
+		
 		flavorProfile = new FlavorProfile();
 		(map["flavorProfile"]["hops"] as List<Map<String,Map<String,String>>>).forEach((Map map)
 		{
