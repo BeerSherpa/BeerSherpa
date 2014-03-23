@@ -48,7 +48,7 @@ void loginUser(String email, String password)
         	pageDivs["advice-page"].classes.remove("hidden");
         	querySelector("#li-advice").classes.add("active");
         	
-			refreshWordCloud();
+			refreshWordCloud("all");
 		}
 		catch(error) //couldn't login with given credentials
 		{

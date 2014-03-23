@@ -1,31 +1,30 @@
 part of BeerSherpa;
 
-void refreshWordCloud()
+void refreshWordCloud(String type)
 {
-	getWordCloudUrl().then((String url)
+	String text = currentUser.flavorProfile.stringValue(type);
+	querySelector("#spinner-img").classes.remove("hidden");
+	
+	getWordCloudUrl(text).then((String url)
 	{
       	ImageElement img = new ImageElement()
       		..src = url
+      		..id = "wordcloud-img"
       		..className = "img-responsive img-rounded center-block";
       	img.onLoad.listen((_)
   		{
-      		querySelector("#wordcloud-row").children.clear();
+      		querySelector("#spinner-img").classes.add("hidden");
+      		querySelector("#wordcloud-img").remove();
       		querySelector("#wordcloud-row").append(img);
   		});
 	});
 }
 
-Future<String> getWordCloudUrl()
+Future<String> getWordCloudUrl(String text)
 {
 	Completer c = new Completer();
 	
-	String text = "";
-	if(currentUser != null)
-	{
-		text = currentUser.flavorProfile.toString();
-	}
-	
-    text = Uri.encodeComponent(text);
+	text = Uri.encodeComponent(text);
     String url = "https://gatheringpoint-word-cloud-maker.p.mashape.com/index.php?height=400&width=800&textblock=$text";
 	Map headers = {'X-Mashape-Authorization': 'Q5d3oXAVSAsamyr9yvcf9V8VEQihfeqW'};
     

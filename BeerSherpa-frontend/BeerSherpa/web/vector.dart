@@ -6,24 +6,23 @@ part of BeerSherpa;
  */
 double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 {
-	double distance = 0.0;
-	double sum = 0.0;
-	print(userVector);
-	print(beerVector);
+	double dotSum = 0.0;
+	double beerSum = 0.0;
+	double userSum = 0.0;
 	beerVector.forEach((String name, double percent)
 	{
-		double userPercent = 0.0;
+		beerSum += pow(percent,2);
 		if(userVector[name] != null)
-			userPercent = userVector[name];
-		sum += pow((userPercent - percent),2);
+			dotSum += percent*userVector[name];
 	});
 	userVector.forEach((String name, double percent)
-	{
-		if(beerVector[name] == null) //if not in beer vector, we didn't count it yet
-			sum += pow(percent,2);
-	});
-		
-	return (1/(1+sqrt(sum)));
+    {
+		userSum += pow(percent,2);
+    });
+	double denominator = sqrt(beerSum) * sqrt(userSum);
+	double raw = dotSum/denominator;
+	
+	return (raw+1)/2;
 }
 
 Map<String,double> getBeerVector(Map map)
