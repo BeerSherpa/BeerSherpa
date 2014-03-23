@@ -154,8 +154,7 @@ void newUser(String email, String password)
 			querySelector("#navbar-input-password").classes.add("hidden");
 			querySelector("#navbar-button-login").classes.add("hidden");
 			querySelector("#li-advice").classes.add("active");
-
-			window.scroll(0,0);
+			
 			pageDivs["ftu-page"].classes.remove("hidden");
 		}
 		catch(error)
