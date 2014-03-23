@@ -12,14 +12,14 @@ void initSearch(){
 
 void Search(String query){
   //Create url 
-  String url = "http://beersherpaapp.appspot.com/api?endpoint=search&q=$query&withBreweries=Y";
+  String url = "http://beersherpaapp.appspot.com/api?endpoint=search&q=$query&withBreweries=Y&withIngredients=Y";
   //Send request
   var request = HttpRequest.getString(url).then(showResults);
 }
 
 void SearchBeer(String query){
   //Create url 
-  String url = "http://beersherpaapp.appspot.com/api?endpoint=search&q=$query&type=beer&withBreweries=Y";
+  String url = "http://beersherpaapp.appspot.com/api?endpoint=search&q=$query&type=beer&withBreweries=Y&withIngredients=Y";
   //Send request
   var request = HttpRequest.getString(url).then(showResults);
 }
@@ -96,7 +96,7 @@ void addResult(Map singleResult, UListElement ul, Map images){
   DivElement row = new DivElement()..className="row";
   DivElement col4 = new DivElement()..className="col-sm-4";
   DivElement col8 = new DivElement()..className="col-sm-8"..text="${singleResult["description"]}";
-  DivElement panel = new DivElement()..className="panel panel-info";
+  DivElement panel = new DivElement()..className="panel panel-default";
   DivElement panelHeading = new DivElement()..className="panel-heading";
   DivElement panelBody = new DivElement()..className="panel-body";
   HeadingElement panelTitle = new HeadingElement.h3()..className="panel-title"..text="${singleResult["name"]}  ";
@@ -155,6 +155,7 @@ void createBeerInfoCard(Map singleResult){
     DivElement panelHeading = new DivElement()..className="panel-heading";
     DivElement panelBody = new DivElement()..className="panel-body";
     HeadingElement panelTitle = new HeadingElement.h3()..className="panel-title"..text="${singleResult["name"]}  ";
+    
     Map images = singleResult["labels"];
     
     //Get brewery name
@@ -194,7 +195,11 @@ void createBeerInfoCard(Map singleResult){
     panel.append(panelHeading);
     panel.append(panelBody);
   
-    querySelector("#beer-info-card")..append(panel);
+    //add to both! why the hell not!
+    querySelector("#advice-beer-card")..append(panel.clone(true));
+    querySelector("#tastes-beer-card")..append(panel);
+    
+    
 
 }
 
@@ -208,7 +213,7 @@ void selectedResult(Map singleResult){
   
   if(!querySelector("#advice-page").classes.contains("hidden")){ //if the advice page is not hidden, we will assume we are seeking advice
     //get the beer jumbotron
-    querySelector("#beer-info-card").classes.remove("hidden");
+    querySelector("#advice-beer-card").classes.remove("hidden");
     querySelector("#results-jumbotron").classes.remove("hidden");
     
     createBeerInfoCard(singleResult);
@@ -217,6 +222,14 @@ void selectedResult(Map singleResult){
     
   } else { //the advice page is hidden, we will assume we are seeking likes
     
+    print("intastes");
+    
+    querySelector("#tastes-beer-card").classes.remove("hidden");
+    
+    createBeerInfoCard(singleResult);
+    
+    
+    
   }
   
   
@@ -224,13 +237,14 @@ void selectedResult(Map singleResult){
 
 void advice(){ //cant implement keyboard listener until we figure out how to triggle a data-toggle for the modal
   querySelector("#scroll-results").children.clear();
-  querySelector("#beer-info-card").children.clear();
+  querySelector("#advice-beer-card").children.clear();
   querySelector("#results-jumbotron").classes.add("hidden");
   SearchBeer((querySelector("#advice-input-beer") as InputElement).value);
 }
 
 void tastes(){
   querySelector("#scroll-results").children.clear();
+  querySelector("#tastes-beer-card").children.clear();
   Search((querySelector("#tastes-input-beer") as InputElement).value);
 }
 

@@ -35,7 +35,8 @@ void initListeners()
         (event.target as LIElement).classes.add("active");
         
         //hide jumbotrons
-        querySelector("#beer-info-jumbotron").classes.add("hidden");
+        querySelector("#advice-beer-card").classes.add("hidden");
+        querySelector("#tastes-beer-card").classes.add("hidden");
         querySelector("#results-jumbotron").classes.add("hidden");
                 
         //clear search box
