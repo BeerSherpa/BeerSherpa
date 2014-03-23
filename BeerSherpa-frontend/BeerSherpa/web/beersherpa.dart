@@ -69,6 +69,7 @@ void initListeners()
    });
 	querySelector("#li-profile").onClick.listen((MouseEvent event)
 	{
+	  querySelector("#no-data-alert").classes.add("hidden");//hid alert
 		hideAllPages();
 		querySelector("#wc-row").classes.add("hidden"); //hide the old wordcloud
 		pageDivs["profile-page"].classes.remove("hidden");
@@ -80,6 +81,7 @@ void hideAllPages()
 {
   //always scroll to top
   window.scrollTo(0, 0);
+  
   
 	pageDivs.forEach((String name, Element element)
 	{
