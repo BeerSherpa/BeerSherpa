@@ -23,6 +23,7 @@ void main()
 	pageDivs["ftu-page"] = querySelector("#ftu-page");
 	pageDivs["advice-page"] = querySelector("#advice-page");
 	pageDivs["tastes-page"] = querySelector("#tastes-page");
+	pageDivs["rate-page"] = querySelector("#rate-page");
 	pageDivs["profile-page"] = querySelector("#profile-page");
 		
 	checkLogin();
@@ -53,17 +54,23 @@ void initListeners()
 	{
 		hideAllPages();
 		
-		populateRandom();
-		
 		pageDivs["tastes-page"].classes.remove("hidden");
         (event.target as LIElement).classes.add("active");
         
         //clear search box
         (querySelector("#tastes-input-beer") as InputElement).value = "";
 	});
+	 querySelector("#li-rate").onClick.listen((MouseEvent event)
+   {
+     hideAllPages();
+     
+     pageDivs["rate-page"].classes.remove("hidden");
+         (event.target as LIElement).classes.add("active");
+   });
 	querySelector("#li-profile").onClick.listen((MouseEvent event)
 	{
 		hideAllPages();
+		querySelector("#wc-row").classes.add("hidden"); //hide the old wordcloud
 		pageDivs["profile-page"].classes.remove("hidden");
         (event.target as LIElement).classes.add("active");
 	});
@@ -71,6 +78,9 @@ void initListeners()
 
 void hideAllPages()
 {
+  //always scroll to top
+  window.scrollTo(0, 0);
+  
 	pageDivs.forEach((String name, Element element)
 	{
 		pageDivs[name].classes.add("hidden");
