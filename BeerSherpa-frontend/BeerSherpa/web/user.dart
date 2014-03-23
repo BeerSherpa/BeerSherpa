@@ -116,6 +116,8 @@ class User
     
 		if(styleMap != null && styleMap["name"] != null)
 		{
+			numHits++;
+			
 			String style = map["style"]["name"];
 			if(style.toLowerCase().contains("india pale ale"))
 				style = "India Pale Ale";
@@ -156,6 +158,8 @@ class User
 		}
 		if(map["abv"] != null)
 		{
+			numHits++;
+			
 			double abv = double.parse(map["abv"]);
 			if(abv <= 4.5)
 			{
@@ -208,6 +212,8 @@ class User
 		}
 		if(map["ibu"] != null)
 		{
+			numHits++;
+			
 			double ibu = double.parse(map["ibu"]);
 			if(ibu <= 20)
 			{
@@ -277,10 +283,12 @@ class User
 		if(map["ingredients"] != null)
 		{
 			if(map["ingredients"]["hops"] != null)
-			{
+			{				
 				List<Map<String,String>> hops = map["ingredients"]["hops"];
 				hops.forEach((Map<String,String> hop)
 				{
+					numHits++;
+					
 					if(flavorProfile.hops[hop["name"]] != null)
 					{
 						flavorProfile.hops[hop["name"]].total++;
@@ -301,6 +309,8 @@ class User
 				List<Map<String,String>> malts = map["ingredients"]["malt"];
 				malts.forEach((Map<String,String> malt)
 				{
+					numHits++;
+					
 					if(flavorProfile.malt[malt["name"]] != null)
 					{
 						flavorProfile.malt[malt["name"]].total++;
@@ -321,6 +331,8 @@ class User
 				List<Map<String,String>> yeasts = map["ingredients"]["yeast"];
 				yeasts.forEach((Map<String,String> yeast)
 				{
+					numHits++;
+					
 					if(flavorProfile.yeast[yeast["name"]] != null)
 					{
 						flavorProfile.yeast[yeast["name"]].total++;
@@ -342,6 +354,8 @@ class User
 			List<Map<String,String>> breweries = map["breweries"];
 			breweries.forEach((Map<String,String> brewery)
 			{
+				numHits++;
+				
 				if(flavorProfile.brewery[brewery["name"]] != null)
 				{
 					flavorProfile.brewery[brewery["name"]].total++;
