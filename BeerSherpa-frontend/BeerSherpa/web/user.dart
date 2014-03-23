@@ -12,7 +12,6 @@ class User
 	
 	User.fromJSON(Map map)
 	{
-		print(map);
 		email = map["email"];
 		password = map["password"];
 		flavorProfile = new FlavorProfile();
@@ -109,8 +108,9 @@ class User
 		return map;
 	}
 	
-	void like(Map map, bool like)
+  void like(Map map, bool like)
 	{
+    print(map);
 		if(map["style"]["name"] != null)
 		{
 			String style = map["style"]["name"];

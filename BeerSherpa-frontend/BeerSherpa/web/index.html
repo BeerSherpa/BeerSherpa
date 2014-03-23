@@ -194,7 +194,7 @@
               </div>
               <div class="col-md-3" id="beer-info-ratecol">
                 <h3>Click yum if you like this!</h3>
-                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <button id="ftu-yum" class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
                 <br />
                 <button class="btn btn-lg btn-block btn-danger beer-yuk hidden" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
               </div>
@@ -225,34 +225,6 @@
           </div><!--/ col-lg-6 -->
         </div><!--/ row -->
       </div><!--/ jumbotron-->
-
-      <br />
-
-      <div id="advice-beer-card" class="hidden">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title beer-title">Title</h3>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-3 beer-img">
-
-              </div>
-              <div class="col-md-6">
-                <h3>Description <span class="label hidden label-default beer-label beer-abv"></span> <span class="label label-default beer-label hidden beer-ibu"></span></h3>
-                <div class="beer-desc">
-                </div>
-                <br />
-              </div>
-              <div class="col-sm-3" id="beer-info-ratecol">
-                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
-                <br />
-                <button class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
-              </div>
-            </div>
-          </div>
-        </div><!--/ panel-->
-      </div><!--/ beer-info -->
 
       <br />
 
@@ -311,6 +283,36 @@
             </div>
         </div>
       </div> <!--/ results-jumbotron-->
+
+      <br />
+
+      <div id="advice-beer-card" class="hidden">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title beer-title">Title</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3 beer-img">
+
+              </div>
+              <div class="col-md-6">
+                <h3>Description <span class="label hidden label-default beer-label beer-abv"></span> <span class="label label-default beer-label hidden beer-ibu"></span></h3>
+                <div class="beer-desc">
+                </div>
+                <br />
+              </div>
+              <div class="col-sm-3" id="beer-info-ratecol">
+                <button id="advice-yum" class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <br />
+                <button id="advice-yuk" class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
+              </div>
+            </div>
+          </div>
+        </div><!--/ panel-->
+      </div><!--/ beer-info -->
+
+      
     </div><!--/ advice page (2) -->
 
 
@@ -352,9 +354,9 @@
                 </div>
               </div>
               <div class="col-md-3" id="beer-info-ratecol">
-                <button class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
+                <button id="tastes-yum" class="btn btn-lg btn-block btn-success beer-yum" type="button"><span class="glyphicon glyphicon-thumbs-up"></span> Yum</button>
                 <br />
-                <button class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
+                <button id="tastes-yuk" class="btn btn-lg btn-block btn-danger beer-yuk" type="button"><span class="glyphicon glyphicon-thumbs-down"></span> Yuk</button>
               </div>
             </div>
           </div>
@@ -442,7 +444,7 @@
         <p class="text-muted">The Sherpa thinks you have good taste.</p>
         <div class="row">
           <div id="wordcloud-row" class="col-lg-12">
-            <img id="spinner-img" src="./img/ajaxspinner.gif" class="img-responsive center-block"/>
+            <img id="spinner-img" src="./img/ajaxSpinner.gif" class="img-responsive center-block"/>
           </div>
         </div>
       </div><!--/ profile-wordcloud-jumbotron -->

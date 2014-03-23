@@ -2,6 +2,10 @@ part of BeerSherpa;
 
 int MAX_RESULTS = 40; //Limit search to x results (note: we only consider beers and breweries from the first x results -- therefore this number does not guarentee x hits)
 
+var currentResult;
+var currentCard;
+
+
 void initSearch(){
   //Init listener for advice button
   querySelector("#advice-button-submit")..onClick.listen((MouseEvent e) => advice());
@@ -9,6 +13,34 @@ void initSearch(){
   querySelector("#tastes-button-submit")..onClick.listen((MouseEvent e) => tastes());
   //ftu
   querySelector("#ftu-button-submit")..onClick.listen((MouseEvent e) => ftu());
+  
+  
+  //Set button listens
+  querySelector("#ftu-yum")..onClick.listen((MouseEvent e) //SPECIAL YAY
+  {
+    currentUser.like(currentResult, true);
+    fadeFtuCard();//SPECIAL
+  });
+  querySelector("#advice-yum")..onClick.listen((MouseEvent e)
+  {
+    currentUser.like(currentResult, true);
+    fadeCard(currentCard);
+  });
+  querySelector("#advice-yuk")..onClick.listen((MouseEvent e)
+  {
+    currentUser.like(currentResult, false);
+    fadeCard(currentCard);
+  });
+  querySelector("#tastes-yum")..onClick.listen((MouseEvent e)
+  {
+    currentUser.like(currentResult, true);
+    fadeCard(currentCard);
+  });
+  querySelector("#tastes-yuk")..onClick.listen((MouseEvent e)
+  {
+    currentUser.like(currentResult, false);
+    fadeCard(currentCard);
+  });
 }
 
 void Search(String query){
@@ -200,19 +232,8 @@ void createBeerInfoCard(DivElement card, Map singleResult){
       
     }
     
-    
-    
-    //Set button listens
-    card.querySelector(".beer-yum")..onClick.first.then((MouseEvent e)
-    {
-    	currentUser.like(singleResult, true);
-    	fadeCard(card);
-    });
-    card.querySelector(".beer-yuk")..onClick.first.then((MouseEvent e)
-  	{
-  		currentUser.like(singleResult, false);
-  		fadeCard(card);
-  	});
+    currentCard = card;
+    currentResult = singleResult;
     
     card.classes.remove("hidden");
 }
@@ -226,6 +247,20 @@ void fadeCard(Element card)
 		card.classes.remove("fade");
 		card.classes.add("hidden");
 	});
+}
+
+void fadeFtuCard()
+{
+  querySelector("#ftu-page").classes.add("fade");
+  new Timer.periodic(new Duration(seconds:1), (Timer timer)
+  {
+    timer.cancel();
+    querySelector("#ftu-page").classes.remove("fade");
+    querySelector("#ftu-page").classes.add("hidden");
+    currentCard.classes.add("hidden");
+    querySelector("#results-jumbotron").classes.add("hidden");
+    querySelector("#advice-page").classes.remove("hidden");
+  });
 }
 
 

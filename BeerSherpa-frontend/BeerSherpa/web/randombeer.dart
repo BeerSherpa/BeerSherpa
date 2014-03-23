@@ -4,6 +4,7 @@ part of BeerSherpa;
 List beerids = ["L7OSOj", "8vBYrZ", "qeXBVh", "hj7N75", "ULQE3L", "w1ndc4", "z4k3eU", "vbJQ8t", "Lf1c6i", "iqX54w", "baONtD", "9GtCUG", "yy3cTm", "m3xewW", "cJio9R", "WHQisc", "odItSS", "Uiol9p", "UD5Sm4", "CrEWhc", "Gkd1YS", "eqtMQs", "X4JKZd", "9kidXn", "UpiAAy", "25lKg4", "I4vp71", "187kFc", "rtMecd", "tPayGU", "zYJxUM", "KY5gtZ", "pBfN8o", "CJpcWg", "lHlnqe", "EiCuSk", "RVOBIF", "Q9PlwV"];
 
 Map currentData;
+int currentNumber;
 
 void initRandom(){
   querySelector("#rate-button-skip")..onClick.listen((MouseEvent e) => skip());
@@ -16,14 +17,15 @@ void initRandom(){
     currentUser.like(currentData, false);
     populateRandom();
   }); 
+  currentNumber=0;
 }
 
 //get a random one
 void populateRandom(){
   
-  Random random = new Random();
+  int random = currentNumber++;
   
-  String id = beerids[random.nextInt(beerids.length)];
+  String id = beerids[random];
   
   //Create url 
   String url = "http://beersherpaapp.appspot.com/api?endpoint=beer/$id&withBreweries=Y";
