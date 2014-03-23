@@ -283,7 +283,7 @@ void selectedResult(Map singleResult){
   if(!querySelector("#advice-page").classes.contains("hidden")){ //if the advice page is not hidden, we will assume we are seeking advice
   
     querySelector("#advice-beer-card").classes.remove("hidden");
-    querySelector("#results-jumbotron").classes.remove("hidden");
+    Element resultsJumbotron = querySelector("#results-jumbotron")..classes.remove("hidden");
     DivElement card = querySelector("#advice-beer-card");   
     createBeerInfoCard(card, singleResult);
     
@@ -300,17 +300,25 @@ void selectedResult(Map singleResult){
         //querySelector("#distance").text = formatter.format(similarity);
     	Element loveWord = querySelector("#love-word");
         if(similarity <= .25)
-        	loveWord..text = "Hate"
-        			..classes.add("color-hate");
+        {
+        	loveWord.text = "Hate";
+        	resultsJumbotron.classes.add("red-jumbotron");
+        }
         else if(similarity > .25 && similarity <= .50)
-        	loveWord..text = "Tolerate"
-        			..classes.add("color-tolerate");
+        {
+        	loveWord.text = "Tolerate";
+        	resultsJumbotron.classes.add("yellow-jumbotron");
+        }
         else if(similarity > .50 && similarity <= .75)
-            loveWord..text = "Like"
-            		..classes.add("color-like");
+        {
+            loveWord.text = "Like";
+            resultsJumbotron.classes.add("blue-jumbotron");
+        }
         else if(similarity > .75)
-            loveWord..text = "Love"
-            		..classes.add("color-love");
+        {
+        	loveWord..text = "Love";
+        	resultsJumbotron.classes.add("green-jumbotron");
+        }
         
         Map<String,double> hopsVector = getBeerVector(singleResult,type:"hops");
         hopsVector.forEach((String name, double value) => buildList("hops",name,userVector));
