@@ -7,7 +7,8 @@ Map currentData;
 int currentNumber;
 
 void initRandom(){
-  querySelector("#rate-button-skip")..onClick.listen((MouseEvent e) => skip());
+  print("init random");
+  querySelector("#rate-button-skip")..onClick.listen((MouseEvent e) => populateTrack());
   //Listeners for yak / yum 
   querySelector("#rate-button-yum")..onClick.listen((MouseEvent e) {
     currentUser.like(currentData, true);
@@ -18,7 +19,9 @@ void initRandom(){
     populateTrack();
   }); 
   
+  print("getting user.index");
   currentNumber = currentUser.index;
+  print(currentNumber);
   
   populateTrack();
   
@@ -40,6 +43,7 @@ void populateTrack(){
 }
 
 void populateRandom(){
+  (querySelector("#rate-img") as ImageElement).src = "./img/ajaxSpinner.gif";
   //get header info
   String url = "http://beersherpaapp.appspot.com/api?endpoint=beers&hasLabels=Y";
   var request = HttpRequest.getString(url).then(parseHeader);
@@ -126,15 +130,5 @@ void buildResult(String responseText) {
   
 
    
-}
-
-/*
- * 
- * LISTENERIES:
- * 
- */
-
-void skip(){
-  populateRandom();
 }
 

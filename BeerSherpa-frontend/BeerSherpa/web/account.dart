@@ -15,6 +15,7 @@ void checkLogin()
 		pageDivs["advice-page"].classes.remove("hidden");
 		querySelector("#normal-nav").classes.remove("hidden");
 		querySelector("#login-nav").classes.add("hidden");
+		initRandom();
 	}
 	else if(loggedIn == "none"){ //user logged out
     	pageDivs["landing-page"].classes.remove("hidden");
@@ -159,6 +160,7 @@ void newUser(String email, String password)
 			querySelector("#li-advice").classes.add("active");
 			
 			pageDivs["ftu-page"].classes.remove("hidden");
+			initRandom();
 		}
 		catch(error)
 		{
