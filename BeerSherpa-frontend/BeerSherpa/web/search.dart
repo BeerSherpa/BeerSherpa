@@ -297,15 +297,20 @@ void selectedResult(Map singleResult){
     	querySelector("#ibu-list-group").children.clear();
     	
     	double similarity = getDistance(getBeerVector(singleResult),userVector);
-        querySelector("#distance").text = formatter.format(similarity);
+        //querySelector("#distance").text = formatter.format(similarity);
+    	Element loveWord = querySelector("#love-word");
         if(similarity <= .25)
-        	querySelector("#love-word").text = "Hate";
+        	loveWord..text = "Hate"
+        			..classes.add("color-hate");
         else if(similarity > .25 && similarity <= .50)
-        	querySelector("#love-word").text = "Tolerate";
+        	loveWord..text = "Tolerate"
+        			..classes.add("color-tolerate");
         else if(similarity > .50 && similarity <= .75)
-            querySelector("#love-word").text = "Like";
+            loveWord..text = "Like"
+            		..classes.add("color-like");
         else if(similarity > .75)
-            querySelector("#love-word").text = "Love";
+            loveWord..text = "Love"
+            		..classes.add("color-love");
         
         Map<String,double> hopsVector = getBeerVector(singleResult,type:"hops");
         hopsVector.forEach((String name, double value) => buildList("hops",name,userVector));
@@ -382,7 +387,7 @@ void selectedResult(Map singleResult){
 				querySelector("#fav-style").classes.add("hidden");
 		});
 		
-		print(confidence(singleResult,userVector));
+		querySelector("#confidence").text = "The Sherpa is " + formatter.format(confidence(singleResult,userVector)) + " sure.";
     }
     
     //format the styling

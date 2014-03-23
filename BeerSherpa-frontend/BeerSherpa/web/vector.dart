@@ -23,19 +23,9 @@ double getDistance(Map<String,double> beerVector, Map<String,double> userVector)
 	double raw = dotSum/denominator;
 	
 	double normalized = (raw+1)/2;
-	
-	print("raw: " + normalized.toString());
-	return normalized;
-	
-	if(normalized < .55)
-		normalized *= .6;
-	else
-		normalized *= 1.2;
-	if(normalized > .95)
-		normalized = .95;
-	
 	if(normalized == double.NAN)
-		normalized = 0.0;
+    	normalized = 0.0;
+	
 	return normalized;
 }
 
