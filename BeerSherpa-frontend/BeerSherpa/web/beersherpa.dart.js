@@ -389,6 +389,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       t1.remove$1(t1, "hidden");
       t1 = J.get$classes$x(document.querySelector("#login-nav"));
       t1.add$1(t1, "hidden");
+      L.initRandom();
     } else {
       t1 = $.get$pageDivs();
       J.remove$1$ax(J.get$classes$x(t1.$index(t1, "landing-page")), "hidden");
@@ -396,7 +397,6 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     L.attachListeners();
     L.initListeners();
     L.initSearch();
-    L.initRandom();
     L.initProfile();
   },
   "+main:0:0": 1,
@@ -470,6 +470,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
   "+refreshWordCloud:1:0": 1,
   initRandom: function() {
     var t1, t2, t3;
+    P.print("init random");
     t1 = document.querySelector("#rate-button-skip");
     t1.toString;
     t2 = C.EventStreamProvider_click._eventType;
@@ -492,22 +493,50 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     t2 = new W._EventStreamSubscription(0, t1, t2, W._wrapZone(new L.initRandom_closure1()), false);
     H.setRuntimeTypeInfo(t2, [H.getTypeArgumentByIndex(t3, 0)]);
     t2._tryResume$0();
-    $.currentNumber = 0;
-    L.populateRandom();
+    P.print("getting user.index");
+    t2 = $.currentUser.index;
+    $.currentNumber = t2;
+    P.print(t2);
+    L.populateTrack();
   },
   "+initRandom:0:0": 1,
-  populateRandom: function() {
-    var random, t1;
-    random = $.currentNumber;
-    if (typeof random !== "number")
-      return random.$add();
-    $.currentNumber = random + 1;
-    t1 = $.get$beerids();
-    if (random >= 38)
-      return H.ioore(t1, random);
-    W.HttpRequest_getString("http://beersherpaapp.appspot.com/api?endpoint=beer/" + t1[random] + "&withBreweries=Y", null, null).then$1(L.buildResult$closure);
+  populateTrack: function() {
+    var t1, trackIndex;
+    t1 = $.currentNumber;
+    $.get$beerids();
+    if (J.$lt$n(t1, 38) === true) {
+      trackIndex = $.currentNumber;
+      t1 = J.$add$ns(trackIndex, 1);
+      $.currentNumber = t1;
+      $.currentUser.index = t1;
+      t1 = $.get$beerids();
+      if (trackIndex >>> 0 !== trackIndex || trackIndex >= 38)
+        return H.ioore(t1, trackIndex);
+      W.HttpRequest_getString("http://beersherpaapp.appspot.com/api?endpoint=beer/" + t1[trackIndex] + "&withBreweries=Y", null, null).then$1(L.buildResult$closure);
+    } else {
+      H.interceptedTypeCast(document.querySelector("#rate-img"), "$isImageElement").src = "./img/ajaxSpinner.gif";
+      W.HttpRequest_getString("http://beersherpaapp.appspot.com/api?endpoint=beers&hasLabels=Y", null, null).then$1(L.parseHeader$closure);
+    }
   },
-  "+populateRandom:0:0": 1,
+  "+populateTrack:0:0": 1,
+  parseHeader: function(responseText) {
+    var totalPages, randPage;
+    totalPages = J.$index$asx(C.C_JsonCodec.decode$1(responseText), "numberOfPages");
+    P.print(totalPages);
+    randPage = C.C__Random.nextInt$1(totalPages);
+    if (randPage === 0)
+      randPage = 1;
+    P.print(C.JSInt_methods.toString$0(randPage));
+    W.HttpRequest_getString("http://beersherpaapp.appspot.com/api?endpoint=beers&p=" + randPage + "&hasLabels=Y&withBreweries=Y&withIngredients=Y", null, null).then$1(L.getRandData$closure);
+  },
+  "+parseHeader:1:0": 1,
+  getRandData: function(responseText) {
+    var data, t1;
+    data = J.$index$asx(C.C_JsonCodec.decode$1(responseText), "data");
+    t1 = J.getInterceptor$asx(data);
+    W.HttpRequest_getString("http://beersherpaapp.appspot.com/api?endpoint=beer/" + H.S(J.$index$asx(t1.$index(data, C.C__Random.nextInt$1(t1.get$length(data))), "id")) + "&withBreweries=Y", null, null).then$1(L.buildResult$closure);
+  },
+  "+getRandData:1:0": 1,
   buildResult: function(responseText) {
     var dataMap, jumbotron, t1, breweries, imgs;
     dataMap = J.$index$asx(C.C_JsonCodec.decode$1(responseText), "data");
@@ -1085,6 +1114,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
         t1 = J.get$classes$x(document.querySelector("#li-advice"));
         t1.add$1(t1, "active");
         L.refreshWordCloud("all");
+        L.initRandom();
       } catch (exception) {
         t1 = H.unwrapException(exception);
         error = t1;
@@ -1198,6 +1228,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
         t1.add$1(t1, "active");
         t1 = $.get$pageDivs();
         J.remove$1$ax(J.get$classes$x(t1.$index(t1, "ftu-page")), "hidden");
+        L.initRandom();
       } catch (exception) {
         H.unwrapException(exception);
         t1 = J.get$classes$x(document.querySelector("#signup-error"));
@@ -1334,8 +1365,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
   initRandom_closure: {
     "": "Closure;",
     call$1: function(e) {
-      L.populateRandom();
-      return;
+      return L.populateTrack();
     },
     "+call:1:0": 1,
     $isFunction: true,
@@ -1346,7 +1376,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     "": "Closure;",
     call$1: function(e) {
       $.currentUser.like$2($.currentData, true);
-      L.populateRandom();
+      L.populateTrack();
     },
     "+call:1:0": 1,
     $isFunction: true,
@@ -1357,7 +1387,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
     "": "Closure;",
     call$1: function(e) {
       $.currentUser.like$2($.currentData, false);
-      L.populateRandom();
+      L.populateTrack();
     },
     "+call:1:0": 1,
     $isFunction: true,
@@ -12783,6 +12813,7 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
   "+ImageData": 0,
   ImageElement: {
     "": "HtmlElement;src}-",
+    $isImageElement: true,
     "%": "HTMLImageElement"
   },
   "+ImageElement": 0,
@@ -14286,7 +14317,20 @@ init.mangledNames = {$add: "+:1:0", $div: "/:1:0", $ge: ">=:1:0", $gt: ">:1:0", 
       return b;
     return a;
   },
-  "+max:2:0": 1
+  "+max:2:0": 1,
+  _Random: {
+    "": "Object;",
+    nextInt$1: function(max) {
+      var t1 = J.getInterceptor$n(max);
+      if (t1.$lt(max, 0) === true)
+        throw H.wrapException(new P.ArgumentError("negative max: " + H.S(max)));
+      if (t1.$gt(max, 4294967295) === true)
+        max = 4294967295;
+      return Math.random() * max >>> 0;
+    },
+    "+nextInt:1:0": 1
+  },
+  "+_Random": 0
 }],
 ["dart.typed_data", "dart:typed_data", , P, {
   TypedData: {
@@ -15981,6 +16025,8 @@ $$ = null;
 init.globalFunctions.loginUser$closure = L.loginUser$closure = new L.Closure$2(L.loginUser, "loginUser$closure");
 init.globalFunctions.newUser$closure = L.newUser$closure = new L.Closure$2(L.newUser, "newUser$closure");
 init.globalFunctions.main$closure = L.main$closure = new L.Closure$0(L.main, "main$closure");
+init.globalFunctions.parseHeader$closure = L.parseHeader$closure = new L.Closure$1(L.parseHeader, "parseHeader$closure");
+init.globalFunctions.getRandData$closure = L.getRandData$closure = new L.Closure$1(L.getRandData, "getRandData$closure");
 init.globalFunctions.buildResult$closure = L.buildResult$closure = new L.Closure$1(L.buildResult, "buildResult$closure");
 init.globalFunctions.showResults$closure = L.showResults$closure = new L.Closure$1(L.showResults, "showResults$closure");
 init.globalFunctions.IsolateNatives__processWorkerMessage$closure = H.IsolateNatives__processWorkerMessage$closure = new L.Closure$2(H.IsolateNatives__processWorkerMessage, "IsolateNatives__processWorkerMessage$closure");
@@ -16054,12 +16100,12 @@ P._BroadcastSubscription.$is_BufferingStreamSubscription = true;
 P._BroadcastSubscription.$is_EventSink = true;
 P._BroadcastSubscription.$isStreamSubscription = true;
 P._BroadcastSubscription.$isObject = true;
+P.Timer.$isTimer = true;
+P.Timer.$isObject = true;
 P.Map.$isMap = true;
 P.Map.$isObject = true;
 L.Liked.$isLiked = true;
 L.Liked.$isObject = true;
-P.Timer.$isTimer = true;
-P.Timer.$isObject = true;
 P.Function.$isFunction = true;
 P.Function.$isObject = true;
 P.Future.$isFuture = true;
@@ -16354,6 +16400,7 @@ J.trim$0$s = function(receiver) {
 };
 C.C_JsonCodec = new P.JsonCodec();
 C.C__DelayedDone = new P._DelayedDone();
+C.C__Random = new P._Random();
 C.C__RootZone = new P._RootZone();
 C.Duration_0 = new P.Duration(0);
 C.EventStreamProvider_click = new W.EventStreamProvider("click");
