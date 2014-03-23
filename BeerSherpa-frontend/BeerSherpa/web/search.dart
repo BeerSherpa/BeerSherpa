@@ -252,6 +252,7 @@ void fadeCard(Element card)
 void fadeFtuCard()
 {
   querySelector("#ftu-page").classes.add("fade");
+  querySelector("#normal-nav").classes.remove("hidden");
   querySelector("#ftu-style-jumbotron").querySelectorAll("input").forEach((Element e) {
    
     String style = e.id;
