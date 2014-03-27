@@ -7,6 +7,8 @@ He will be your personal guide through the world of craft beer.
 
 The Sherpa doesn't offer suggestions but, rather, guides you before you purchase a beer. The Sherpa will first learn your personal taste-profile based on beers you rate with a simple thumbs-up or thumbs-down. Then, when you are at the bar or bottle-shop, you can ask the Sherpa if you'd enjoy a beer before you make the purchase.
 
+<h2>Check it out: <a href='http://www.buckyoung.com/beersherpa'>Beer Sherpa</a> (Open-Beta)!</h2>
+
 <hr>
 We (Buck Young and Robert McDermot) designed Beer Sherpa for the 2014 University of Pittsburgh <a href='http://www.cs.pitt.edu/events/CSDay/2014/hackathon.php'>CS Day Hackathon</a>.  Our challenge was to build a web application that solved a problem.  Mostly this was an open-ended challenge that was scored based on how good your idea was, how well you implemented it, and how well you presented it.
 
