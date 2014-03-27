@@ -27,13 +27,13 @@
               <span class="sr-only">Toggle navigation</span>
               <p>Login</p>
             </button>
-            <img src="./img/tiny.png" id="tiny-navbar-pic"/> <span class="brand">Beer Sherpa</span>
+            <img src="./img/tiny.png" id="tiny-navbar-pic"/> <span class="brand">Beer Sherpa (Beta)</span>
           </div><!--/ header -->
           <div class="collapse navbar-collapse" id="sherpa-nav">
             <form class="navbar-form navbar-right" role="search">
 
               <div class="form-group">
-                <input id="navbar-input-email" type="email" class="form-control" placeholder="Email">
+                <input id="navbar-input-email" type="email" class="form-control" placeholder="Username">
               </div>
 
               <div class="form-group">
@@ -57,7 +57,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <img src="./img/tiny.png" id="tiny-navbar-pic"/> <span class="brand">Beer Sherpa</span>
+            <img src="./img/tiny.png" id="tiny-navbar-pic"/> <span class="brand">Beer Sherpa (Beta)</span>
           </div><!--/ header -->
           <div class="collapse navbar-collapse" id="sherpa-nav">
             <ul class="nav navbar-nav navbar-right">
@@ -102,13 +102,13 @@
         <div class="row">
           <div class="col-md-8">
              <h1>Signing Up is Easy</h1>
-             <p class="text-muted">Simply provide an email address and create a password.</p>
+             <p class="text-muted">Simply create a username and password.</p>
           </div>
           <div class="col-md-4">
              <form role="form">
                 <div class="form-group">
-                  <label for="email-input">Email address</label>
-                  <input id="signup-input-email" type="email" class="form-control" id="email-input" placeholder="Enter email">
+                  <label for="email-input">Username</label>
+                  <input id="signup-input-email" type="email" class="form-control" id="email-input" placeholder="Create Username">
                 </div>
                 <div class="form-group">
                   <label for="password-input">Password</label>
@@ -239,12 +239,12 @@
         </div>
 
         <div class="row">
-          <div id="fav-brewery" class="col-md-4 hidden">
+          <div id="fav-brewery" class="col-md-6 hidden">
             <ul class="list-group">
               <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favored Brewery!</li>
             </ul>
           </div>
-          <div id="fav-style" class="col-md-4 hidden">
+          <div id="fav-style" class="col-md-6 hidden">
             <ul class="list-group">
               <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-certificate"></span> Favored Style!</li>
             </ul>
@@ -253,46 +253,74 @@
 
               <div class="row">
                 <div class="col-md-4">
-                  <h4>Hops</h4>
+                   <div class="panel panel-default">
+                      <div class="panel-heading">
+                  <h4 class="panel-title">Hops</h4>
+                </div>
+                <div class="panel-body">
                   <p id="hops-match" class="text-muted">68% flavor-match</p>
                   <div>
                     <ul id="hops-list-group" class="list-group"></ul>
       			       </div>
+                 </div></div>
                 </div>
 
        		<div class="col-md-4">
-                  <h4>Malts &amp; Fermentables</h4>
+                                <div class="panel panel-default">
+                      <div class="panel-heading">
+                  <h4 class="panel-title">Malts &amp; Fermentables</h4>
+                </div>
+                <div class="panel-body">
                   <p id="malt-match" class="text-muted">27% flavor-match</p>
        			<div>	  
               <ul id="malt-list-group" class="list-group"></ul>
-      			</div>         
+      			</div>     
+            </div></div>    
       		</div>
 
                 <div class="col-md-4">
-                  <h4>Yeast</h4>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                  <h4 class="panel-title">Yeast</h4>
+                </div>
+                <div class="panel-body">
                   <p id="yeast-match" class="text-muted">89% flavor-match</p>
                   <div>	  
                     <ul id="yeast-list-group" class="list-group"></ul>
-      			</div>  
+      			</div> 
+            </div>
+            </div> 
                 </div>
               </div>
 
               <div class="row">
                   <div class="col-md-6">
-                    <h4>IBU</h4>
-                    <p id="ibu-match" class="text-muted">83% flavor-match</p>
-                    <div>	  
-                      <ul id="ibu-list-group" class="list-group"></ul>
-      			</div>  
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h4 class="panel-title">IBU</h4>
+                        </div>
+                        <div class="panel-body">
+                          <p id="ibu-match" class="text-muted">83% flavor-match</p>
+                          <div>	  
+                            <ul id="ibu-list-group" class="list-group"></ul>
+            			       </div>  
+                       </div>
+                     </div>
                   </div>
                   <div class="col-md-6">
-                    <h4>ABV</h4>
-                    <p id="abv-match" class="text-muted">12% flavor-match</p>
-                    <div>	  
-                      <ul id="abv-list-group" class="list-group"></ul>
-      			</div>  
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">ABV</h4>
+                      </div>
+                      <div class="panel-body">
+                        <p id="abv-match" class="text-muted">12% flavor-match</p>
+                        <div>	  
+                          <ul id="abv-list-group" class="list-group"></ul>
+          			        </div> 
+                      </div> <!--/body-->
+                    </div><!--/panel-->
                   </div>
-              </div>
+              </div><!--/row-->
       </div> <!--/ results-jumbotron-->
 
       <br />
@@ -509,6 +537,17 @@
     <!-- Dart core JS -->
 	<script type="application/dart" src="beersherpa.dart"></script>
 	<script src="packages/browser/dart.js"></script>
+
+  <footer class="text-muted">
+    
+    <a href="mailto:me@buckyoung.com">Report a Problem</a>
+    <hr>
+    Beer Sherpa is an <a href="https://github.com/BeerSherpa/BeerSherpa" target="_blank">open-source</a> project created in 28 hours for the first-annual <a href="https://www.cs.pitt.edu/events/CSDay/2014/hackathon.php" target="_blank">CSDay Hackathon</a>.
+    <br />This project placed second amongst five and is currently in Open-Beta, pending an official launch.
+
+    <br />Powered by <a href="http://brewerydb.com" target="_blank">BreweryDB</a>, <a href="https://developers.google.com/appengine/" target="_blank">Google App Engine</a>, <a href="https://www.dartlang.org" target="_blank">Dart</a>, and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>.
+    <br/>&copy; 2014 Robert McDermot and Buck Young
+    </footer>
 
   </body>
 </html>

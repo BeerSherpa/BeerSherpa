@@ -1,6 +1,17 @@
 body {
   padding-top: 100px;
-  padding-bottom: 100px;
+}
+
+
+footer {
+	padding-top: 100px;
+	text-align: center;
+	padding-bottom: 20px;
+	font-size: .8em;
+}
+
+footer a {
+	color: #99aDb7;
 }
 
 #li-logout{
