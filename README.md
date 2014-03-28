@@ -1,7 +1,7 @@
 BeerSherpa
 ==========
 
-<img src='BeerSherpa-frontend/BeerSherpa/web/img/logo.png' width='25%' height='25%' align='left'>
+<img src='BeerSherpa-frontend/BeerSherpa/web/img/logo.png' width='25%' height='25%' align='left' />
 Meet the Sherpa!
 He will be your personal guide through the world of craft beer.
 
